@@ -20,7 +20,7 @@ export const products: Product[] = [
     slug: "aura-pro-headphones",
     name: "Aura Pro Headphones",
     category: "Audio",
-    price: "$549",
+    price: "$1,899",
     image: productHeadphones,
     tagline: "Immersive sound, redefined.",
     description:
@@ -45,7 +45,7 @@ export const products: Product[] = [
     slug: "zenith-ultrabook",
     name: "Zenith UltraBook",
     category: "Computing",
-    price: "$2,499",
+    price: "$7,999",
     image: productLaptop,
     tagline: "Power without compromise.",
     description:
@@ -70,7 +70,7 @@ export const products: Product[] = [
     slug: "chronos-smart-watch",
     name: "Chronos Smart Watch",
     category: "Wearables",
-    price: "$899",
+    price: "$3,499",
     image: productWatch,
     tagline: "Timeless meets intelligent.",
     description:
@@ -95,7 +95,7 @@ export const products: Product[] = [
     slug: "nova-wireless-earbuds",
     name: "Nova Wireless Earbuds",
     category: "Audio",
-    price: "$349",
+    price: "$1,299",
     image: productEarbuds,
     tagline: "Pure sound, zero distractions.",
     description:
