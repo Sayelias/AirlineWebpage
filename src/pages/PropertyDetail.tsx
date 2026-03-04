@@ -1,6 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import { ArrowLeft, Calendar, Shield, Sparkles } from "lucide-react";
+import BookingDialog from "@/components/BookingDialog";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { getPropertyBySlug, properties } from "@/data/properties";
@@ -83,10 +84,12 @@ const PropertyDetail = () => {
               </div>
 
               <div className="mb-8 flex flex-wrap gap-3">
-                <button className="inline-flex items-center gap-2 rounded-full bg-gradient-gold px-8 py-3.5 font-display text-sm font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20">
-                  <Calendar className="h-4 w-4" />
-                  Reserve Now
-                </button>
+                <BookingDialog defaultSuite={property.name}>
+                  <button className="inline-flex items-center gap-2 rounded-full bg-gradient-gold px-8 py-3.5 font-display text-sm font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20">
+                    <Calendar className="h-4 w-4" />
+                    Reserve Now
+                  </button>
+                </BookingDialog>
                 <button className="rounded-full border border-border px-8 py-3.5 font-display text-sm font-medium text-foreground transition-all hover:border-primary/50 hover:bg-secondary">
                   Enquire
                 </button>

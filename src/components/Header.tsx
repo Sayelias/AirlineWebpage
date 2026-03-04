@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Menu, X, User } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
+import BookingDialog from "@/components/BookingDialog";
 
 const navLinks = [
   { label: "Properties", href: "/#properties" },
@@ -37,12 +38,11 @@ const Header = () => {
           <Link to="/membership/dashboard" className="text-muted-foreground transition-colors hover:text-foreground" aria-label="Member Portal">
             <User className="h-5 w-5" />
           </Link>
-          <a
-            href="#properties"
-            className="hidden rounded-full bg-gradient-gold px-6 py-2 font-display text-xs font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20 md:inline-flex"
-          >
-            Reserve Now
-          </a>
+          <BookingDialog>
+            <button className="hidden rounded-full bg-gradient-gold px-6 py-2 font-display text-xs font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20 md:inline-flex">
+              Reserve Now
+            </button>
+          </BookingDialog>
           <button
             className="text-muted-foreground transition-colors hover:text-foreground md:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}

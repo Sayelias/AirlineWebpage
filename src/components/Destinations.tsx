@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { MapPin, Phone, Star } from "lucide-react";
+import { MapPin, Phone, Star, Calendar } from "lucide-react";
+import BookingDialog from "@/components/BookingDialog";
 
 const destinations = [
   {
@@ -96,6 +97,13 @@ const Destinations = () => {
                   <span>{dest.phone}</span>
                 </div>
               </div>
+
+              <BookingDialog defaultDestination={dest.property}>
+                <button className="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-full border border-border/50 py-2.5 font-display text-xs font-semibold text-muted-foreground transition-all hover:border-primary/50 hover:text-foreground">
+                  <Calendar className="h-3.5 w-3.5" />
+                  Book This Property
+                </button>
+              </BookingDialog>
             </motion.div>
           ))}
         </div>
