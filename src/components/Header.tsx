@@ -5,9 +5,9 @@ import { Link } from "react-router-dom";
 
 const navLinks = [
   { label: "Products", href: "/#products" },
+  { label: "Membership", href: "/membership" },
   { label: "Stores", href: "/#stores" },
   { label: "FAQ", href: "/faq" },
-  { label: "Support", href: "/faq" },
 ];
 
 const Header = () => {
