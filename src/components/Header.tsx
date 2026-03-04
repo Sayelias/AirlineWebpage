@@ -1,8 +1,14 @@
 import { useState } from "react";
 import { Menu, X, ShoppingBag, Search } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
 
-const navLinks = ["Products", "Stores", "About", "Support"];
+const navLinks = [
+  { label: "Products", href: "/#products" },
+  { label: "Stores", href: "/#stores" },
+  { label: "FAQ", href: "/faq" },
+  { label: "Support", href: "/faq" },
+];
 
 const Header = () => {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -10,19 +16,19 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
       <div className="container flex h-16 items-center justify-between md:h-20">
-        <a href="/" className="font-display text-lg font-bold tracking-tight md:text-xl">
+        <Link to="/" className="font-display text-lg font-bold tracking-tight md:text-xl">
           <span className="text-gradient-gold">AnyCompany</span>{" "}
           <span className="font-light text-foreground">Premium</span>
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
             <a
-              key={link}
-              href={`#${link.toLowerCase()}`}
+              key={link.label}
+              href={link.href}
               className="font-body text-sm tracking-wide text-muted-foreground transition-colors hover:text-foreground"
             >
-              {link}
+              {link.label}
             </a>
           ))}
         </nav>
@@ -55,12 +61,12 @@ const Header = () => {
             <nav className="container flex flex-col gap-4 py-6">
               {navLinks.map((link) => (
                 <a
-                  key={link}
-                  href={`#${link.toLowerCase()}`}
+                  key={link.label}
+                  href={link.href}
                   className="font-display text-lg text-muted-foreground transition-colors hover:text-foreground"
                   onClick={() => setMobileOpen(false)}
                 >
-                  {link}
+                  {link.label}
                 </a>
               ))}
             </nav>

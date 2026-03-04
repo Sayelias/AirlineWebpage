@@ -1,9 +1,41 @@
-const footerLinks = {
-  Products: ["Headphones", "Laptops", "Watches", "Earbuds", "Accessories"],
-  Company: ["About Us", "Careers", "Press", "Sustainability"],
-  Support: ["Contact", "FAQ", "Warranty", "Returns"],
-  Legal: ["Privacy Policy", "Terms of Service", "Cookie Policy"],
-};
+import { Link } from "react-router-dom";
+
+const footerLinks: { title: string; links: { label: string; href: string }[] }[] = [
+  {
+    title: "Products",
+    links: [
+      { label: "Headphones", href: "/products/aura-pro-headphones" },
+      { label: "Laptops", href: "/products/zenith-ultrabook" },
+      { label: "Watches", href: "/products/chronos-smart-watch" },
+      { label: "Earbuds", href: "/products/nova-wireless-earbuds" },
+    ],
+  },
+  {
+    title: "Company",
+    links: [
+      { label: "About Us", href: "#" },
+      { label: "Careers", href: "#" },
+      { label: "Press", href: "#" },
+    ],
+  },
+  {
+    title: "Support",
+    links: [
+      { label: "Contact", href: "#" },
+      { label: "FAQ", href: "/faq" },
+      { label: "Warranty", href: "/faq" },
+      { label: "Returns", href: "/faq" },
+    ],
+  },
+  {
+    title: "Legal",
+    links: [
+      { label: "Privacy Policy", href: "#" },
+      { label: "Terms of Service", href: "#" },
+      { label: "Cookie Policy", href: "#" },
+    ],
+  },
+];
 
 const Footer = () => {
   return (
@@ -11,28 +43,28 @@ const Footer = () => {
       <div className="container">
         <div className="mb-12 grid gap-10 md:grid-cols-5">
           <div className="md:col-span-1">
-            <a href="/" className="font-display text-lg font-bold">
+            <Link to="/" className="font-display text-lg font-bold">
               <span className="text-gradient-gold">AnyCompany</span>
-            </a>
+            </Link>
             <p className="mt-3 font-body text-sm leading-relaxed text-muted-foreground">
               Premium electronics for the modern connoisseur.
             </p>
           </div>
 
-          {Object.entries(footerLinks).map(([title, links]) => (
-            <div key={title}>
+          {footerLinks.map((section) => (
+            <div key={section.title}>
               <h4 className="mb-4 font-display text-sm font-semibold uppercase tracking-wider">
-                {title}
+                {section.title}
               </h4>
               <ul className="space-y-2.5">
-                {links.map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
+                {section.links.map((link) => (
+                  <li key={link.label}>
+                    <Link
+                      to={link.href}
                       className="font-body text-sm text-muted-foreground transition-colors hover:text-foreground"
                     >
-                      {link}
-                    </a>
+                      {link.label}
+                    </Link>
                   </li>
                 ))}
               </ul>
