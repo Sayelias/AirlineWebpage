@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { Link } from "react-router-dom";
-import { products } from "@/data/products";
+import { properties } from "@/data/properties";
 
-const FeaturedProducts = () => {
+const FeaturedProperties = () => {
   return (
-    <section id="products" className="py-24 md:py-32">
+    <section id="properties" className="py-24 md:py-32">
       <div className="container">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -16,35 +16,35 @@ const FeaturedProducts = () => {
         >
           <div>
             <p className="mb-2 font-display text-sm font-medium uppercase tracking-[0.3em] text-primary">
-              Curated Selection
+              Curated Experiences
             </p>
-            <h2 className="font-display text-3xl font-bold tracking-tight md:text-5xl">
-              Featured Products
+            <h2 className="font-display text-3xl font-bold italic tracking-tight md:text-5xl">
+              Suites & Experiences
             </h2>
           </div>
           <a
             href="#"
-            className="hidden items-center gap-2 font-display text-sm text-muted-foreground transition-colors hover:text-primary md:inline-flex"
+            className="hidden items-center gap-2 font-body text-base text-muted-foreground transition-colors hover:text-primary md:inline-flex"
           >
             View All <ArrowRight className="h-4 w-4" />
           </a>
         </motion.div>
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {products.map((product, i) => (
+          {properties.map((property, i) => (
             <motion.div
-              key={product.slug}
+              key={property.slug}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
             >
-              <Link to={`/products/${product.slug}`} className="group block cursor-pointer">
+              <Link to={`/properties/${property.slug}`} className="group block cursor-pointer">
                 <div className="relative mb-4 overflow-hidden rounded-lg bg-secondary">
                   <img
-                    src={product.image}
-                    alt={product.name}
-                    className="aspect-square w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    src={property.image}
+                    alt={property.name}
+                    className="aspect-[4/5] w-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
@@ -55,14 +55,14 @@ const FeaturedProducts = () => {
                   </div>
                 </div>
 
-                <p className="mb-1 font-body text-xs uppercase tracking-widest text-muted-foreground">
-                  {product.category}
+                <p className="mb-1 font-body text-sm uppercase tracking-widest text-muted-foreground">
+                  {property.category}
                 </p>
                 <h3 className="mb-1 font-display text-base font-semibold">
-                  {product.name}
+                  {property.name}
                 </h3>
-                <p className="font-display text-sm text-primary">
-                  {product.price}
+                <p className="font-body text-sm text-primary">
+                  {property.priceFrom}
                 </p>
               </Link>
             </motion.div>
@@ -73,4 +73,4 @@ const FeaturedProducts = () => {
   );
 };
 
-export default FeaturedProducts;
+export default FeaturedProperties;

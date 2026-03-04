@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { Menu, X, ShoppingBag, Search } from "lucide-react";
+import { Menu, X, User } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 
 const navLinks = [
-  { label: "Products", href: "/#products" },
+  { label: "Properties", href: "/#properties" },
+  { label: "Destinations", href: "/#destinations" },
   { label: "Membership", href: "/membership" },
-  { label: "Stores", href: "/#stores" },
   { label: "FAQ", href: "/faq" },
 ];
 
@@ -17,8 +17,8 @@ const Header = () => {
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
       <div className="container flex h-16 items-center justify-between md:h-20">
         <Link to="/" className="font-display text-lg font-bold tracking-tight md:text-xl">
-          <span className="text-gradient-gold">AnyCompany</span>{" "}
-          <span className="font-light text-foreground">Premium</span>
+          <span className="text-gradient-gold">AnyPremium</span>{" "}
+          <span className="font-light text-foreground">Hotels</span>
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
@@ -26,7 +26,7 @@ const Header = () => {
             <a
               key={link.label}
               href={link.href}
-              className="font-body text-sm tracking-wide text-muted-foreground transition-colors hover:text-foreground"
+              className="font-body text-base tracking-wide text-muted-foreground transition-colors hover:text-foreground"
             >
               {link.label}
             </a>
@@ -34,12 +34,15 @@ const Header = () => {
         </nav>
 
         <div className="flex items-center gap-4">
-          <button className="text-muted-foreground transition-colors hover:text-foreground" aria-label="Search">
-            <Search className="h-5 w-5" />
-          </button>
-          <button className="text-muted-foreground transition-colors hover:text-foreground" aria-label="Cart">
-            <ShoppingBag className="h-5 w-5" />
-          </button>
+          <Link to="/membership/dashboard" className="text-muted-foreground transition-colors hover:text-foreground" aria-label="Member Portal">
+            <User className="h-5 w-5" />
+          </Link>
+          <a
+            href="#properties"
+            className="hidden rounded-full bg-gradient-gold px-6 py-2 font-display text-xs font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20 md:inline-flex"
+          >
+            Reserve Now
+          </a>
           <button
             className="text-muted-foreground transition-colors hover:text-foreground md:hidden"
             onClick={() => setMobileOpen(!mobileOpen)}

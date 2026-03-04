@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { Crown, Star, Diamond, Gift, Zap, Shield, Truck, Gem, ArrowRight, Check } from "lucide-react";
+import { Crown, Star, Diamond, Gift, Sparkles, Shield, Plane, Gem, ArrowRight, Check } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
@@ -8,86 +8,86 @@ const tiers = [
   {
     name: "Silver",
     icon: Star,
-    pointsRequired: "0",
-    annualSpend: "Up to $9,999",
+    requirement: "Upon enrollment",
+    nightsRequired: "0+ nights",
     color: "from-zinc-400 to-zinc-300",
     textColor: "text-zinc-300",
     borderColor: "border-zinc-700",
     benefits: [
-      "Earn 1 point per $1 spent",
-      "Birthday reward — 500 bonus points",
-      "Early access to seasonal sales",
-      "Free standard shipping on all orders",
-      "Members-only newsletter",
+      "Complimentary welcome amenity",
+      "Earn 10 points per $1 spent",
+      "Complimentary WiFi & daily newspaper",
+      "Late check-out upon availability",
+      "Members-only rates",
     ],
   },
   {
     name: "Gold",
     icon: Crown,
-    pointsRequired: "10,000",
-    annualSpend: "$10,000 – $24,999",
+    requirement: "15+ nights per year",
+    nightsRequired: "15+ nights",
     color: "from-amber-500 to-yellow-400",
     textColor: "text-primary",
     borderColor: "border-primary/40",
     featured: true,
     benefits: [
-      "Earn 2x points per $1 spent",
-      "Birthday reward — 1,500 bonus points",
-      "Priority access to new product launches",
-      "Free expedited shipping worldwide",
-      "Complimentary gift wrapping",
-      "Exclusive Gold member events & previews",
-      "Dedicated support line",
+      "Guaranteed suite upgrade",
+      "Earn 15 points per $1 spent",
+      "Complimentary breakfast for two",
+      "Early check-in & late check-out guaranteed",
+      "Complimentary pressing service",
+      "Access to Executive Lounge",
+      "Dedicated reservations line",
     ],
   },
   {
     name: "Platinum",
     icon: Diamond,
-    pointsRequired: "25,000",
-    annualSpend: "$25,000+",
+    requirement: "40+ nights per year",
+    nightsRequired: "40+ nights",
     color: "from-sky-300 to-indigo-300",
     textColor: "text-sky-300",
     borderColor: "border-sky-500/40",
     benefits: [
-      "Earn 3x points per $1 spent",
-      "Birthday reward — 5,000 bonus points",
-      "First access to limited-edition products",
-      "Complimentary next-day delivery globally",
-      "Annual $500 store credit",
-      "Private shopping appointments",
-      "Personal concierge & product advisor",
-      "Invitation to annual Platinum gala",
+      "Two-category suite upgrade guaranteed",
+      "Earn 20 points per $1 spent",
+      "Annual complimentary weekend stay",
+      "Priority restaurant reservations",
+      "Complimentary airport transfers worldwide",
+      "Personal concierge at every property",
+      "Invitation to annual Platinum Gala",
+      "Spa credit — $500 per stay",
     ],
   },
 ];
 
 const rewards = [
-  { points: "2,500", reward: "10% off any single item", icon: Gift },
-  { points: "5,000", reward: "$100 store credit", icon: Zap },
-  { points: "10,000", reward: "Exclusive limited-edition accessory", icon: Gem },
-  { points: "20,000", reward: "Premium product of your choice (up to $1,500)", icon: Diamond },
+  { points: "25,000", reward: "Complimentary Night — Standard Suite", icon: Gift },
+  { points: "50,000", reward: "Suite Upgrade Certificate", icon: Sparkles },
+  { points: "100,000", reward: "Spa Retreat Weekend for Two", icon: Gem },
+  { points: "200,000", reward: "Presidential Suite — 3-Night Experience", icon: Diamond },
 ];
 
 const howItWorks = [
   {
     step: "01",
-    title: "Join for Free",
-    description: "Create your AnyCompany Premium account — membership is complimentary.",
+    title: "Join the Circle",
+    description: "Enrollment is complimentary. Create your AnyPremium Circle account.",
   },
   {
     step: "02",
-    title: "Shop & Earn",
-    description: "Earn points on every purchase, in-store and online. Higher tiers earn faster.",
+    title: "Stay & Experience",
+    description: "Earn points on every night, meal, spa visit, and experience across all properties.",
   },
   {
     step: "03",
-    title: "Unlock Rewards",
-    description: "Redeem points for exclusive discounts, products, and once-in-a-lifetime experiences.",
+    title: "Redeem Rewards",
+    description: "Exchange points for complimentary nights, upgrades, and bespoke experiences.",
   },
   {
     step: "04",
-    title: "Rise Through Tiers",
-    description: "Your annual spend automatically elevates your tier and unlocks richer benefits.",
+    title: "Ascend Tiers",
+    description: "Your annual nights stayed elevate your tier and unlock richer privileges.",
   },
 ];
 
@@ -112,21 +112,21 @@ const Membership = () => {
                   Exclusive Membership
                 </span>
               </div>
-              <h1 className="mb-6 font-display text-4xl font-bold leading-tight tracking-tight md:text-6xl">
+              <h1 className="mb-6 font-display text-4xl font-bold italic leading-tight tracking-tight md:text-6xl">
                 The{" "}
-                <span className="text-gradient-gold">AnyCompany</span>{" "}
-                Rewards Club
+                <span className="text-gradient-gold">AnyPremium</span>{" "}
+                Circle
               </h1>
-              <p className="mb-10 font-body text-lg leading-relaxed text-muted-foreground md:text-xl">
-                An invitation to a world of elevated rewards, exclusive access, and
-                personalised luxury. Every purchase brings you closer to extraordinary.
+              <p className="mb-10 font-body text-xl leading-relaxed text-muted-foreground md:text-2xl">
+                An invitation to a world of unmatched hospitality, curated experiences,
+                and privileges reserved for our most valued guests.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Link
                   to="/membership/dashboard"
                   className="group inline-flex items-center gap-2 rounded-full bg-gradient-gold px-8 py-3.5 font-display text-sm font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20"
                 >
-                  Join Now — It's Free
+                  Join the Circle
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
                 <a
@@ -152,7 +152,7 @@ const Membership = () => {
               <p className="mb-2 font-display text-sm font-medium uppercase tracking-[0.3em] text-primary">
                 Simple & Rewarding
               </p>
-              <h2 className="font-display text-3xl font-bold tracking-tight md:text-5xl">
+              <h2 className="font-display text-3xl font-bold italic tracking-tight md:text-5xl">
                 How It Works
               </h2>
             </motion.div>
@@ -171,7 +171,7 @@ const Membership = () => {
                     {item.step}
                   </span>
                   <h3 className="mb-2 font-display text-lg font-semibold">{item.title}</h3>
-                  <p className="font-body text-sm leading-relaxed text-muted-foreground">
+                  <p className="font-body text-base leading-relaxed text-muted-foreground">
                     {item.description}
                   </p>
                 </motion.div>
@@ -192,11 +192,11 @@ const Membership = () => {
               <p className="mb-2 font-display text-sm font-medium uppercase tracking-[0.3em] text-primary">
                 Membership Tiers
               </p>
-              <h2 className="mb-4 font-display text-3xl font-bold tracking-tight md:text-5xl">
-                Choose Your Level
+              <h2 className="mb-4 font-display text-3xl font-bold italic tracking-tight md:text-5xl">
+                Your Journey Awaits
               </h2>
-              <p className="mx-auto max-w-md font-body text-muted-foreground">
-                Your tier is determined by annual spend. The higher you rise, the more extraordinary the privileges.
+              <p className="mx-auto max-w-md font-body text-lg text-muted-foreground">
+                Each tier is defined by annual nights stayed. The more you stay, the more extraordinary the privileges.
               </p>
             </motion.div>
 
@@ -227,8 +227,8 @@ const Membership = () => {
                     <h3 className={`font-display text-2xl font-bold ${tier.textColor}`}>
                       {tier.name}
                     </h3>
-                    <p className="mt-1 font-body text-sm text-muted-foreground">
-                      Annual spend: {tier.annualSpend}
+                    <p className="mt-1 font-body text-base text-muted-foreground">
+                      {tier.requirement}
                     </p>
                   </div>
 
@@ -236,7 +236,7 @@ const Membership = () => {
                     {tier.benefits.map((benefit) => (
                       <li key={benefit} className="flex items-start gap-3">
                         <Check className={`mt-0.5 h-4 w-4 shrink-0 ${tier.textColor}`} />
-                        <span className="font-body text-sm text-muted-foreground">{benefit}</span>
+                        <span className="font-body text-base text-muted-foreground">{benefit}</span>
                       </li>
                     ))}
                   </ul>
@@ -258,8 +258,8 @@ const Membership = () => {
               <p className="mb-2 font-display text-sm font-medium uppercase tracking-[0.3em] text-primary">
                 Redeem Your Points
               </p>
-              <h2 className="font-display text-3xl font-bold tracking-tight md:text-5xl">
-                Rewards Catalog
+              <h2 className="font-display text-3xl font-bold italic tracking-tight md:text-5xl">
+                Rewards
               </h2>
             </motion.div>
 
@@ -277,10 +277,10 @@ const Membership = () => {
                   <p className="mb-2 font-display text-2xl font-bold text-gradient-gold">
                     {r.points}
                   </p>
-                  <p className="font-body text-xs uppercase tracking-widest text-muted-foreground">
+                  <p className="font-body text-sm uppercase tracking-widest text-muted-foreground">
                     Points
                   </p>
-                  <p className="mt-3 font-body text-sm text-foreground">{r.reward}</p>
+                  <p className="mt-3 font-body text-base text-foreground">{r.reward}</p>
                 </motion.div>
               ))}
             </div>
@@ -292,10 +292,10 @@ const Membership = () => {
           <div className="container">
             <div className="grid gap-6 rounded-2xl border border-primary/20 bg-card p-8 sm:grid-cols-2 lg:grid-cols-4">
               {[
-                { icon: Truck, label: "Free Shipping", desc: "On every order, every tier" },
-                { icon: Shield, label: "Extended Warranty", desc: "Up to 3 years for members" },
-                { icon: Gift, label: "Birthday Rewards", desc: "Bonus points on your day" },
-                { icon: Crown, label: "VIP Events", desc: "Exclusive launches & previews" },
+                { icon: Plane, label: "Airport Transfers", desc: "Complimentary luxury transfers" },
+                { icon: Shield, label: "Best Rate Guarantee", desc: "Always the lowest member rate" },
+                { icon: Gift, label: "Welcome Amenities", desc: "Curated arrival gifts" },
+                { icon: Crown, label: "Exclusive Events", desc: "Galas, tastings & cultural experiences" },
               ].map((perk, i) => (
                 <motion.div
                   key={perk.label}
@@ -310,7 +310,7 @@ const Membership = () => {
                   </div>
                   <div>
                     <h4 className="font-display text-sm font-semibold">{perk.label}</h4>
-                    <p className="font-body text-xs text-muted-foreground">{perk.desc}</p>
+                    <p className="font-body text-sm text-muted-foreground">{perk.desc}</p>
                   </div>
                 </motion.div>
               ))}
@@ -326,18 +326,18 @@ const Membership = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="mb-3 font-display text-2xl font-bold md:text-3xl">
-                Ready to elevate your experience?
+              <h2 className="mb-3 font-display text-2xl font-bold italic md:text-3xl">
+                Begin your journey with us
               </h2>
-              <p className="mb-8 font-body text-muted-foreground">
-                Join thousands of members enjoying exclusive rewards.
+              <p className="mb-8 font-body text-lg text-muted-foreground">
+                Join an exclusive circle of travelers who expect nothing less than extraordinary.
               </p>
               <Link
                 to="/membership/dashboard"
                 className="inline-flex items-center gap-2 rounded-full bg-gradient-gold px-10 py-4 font-display text-sm font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20"
               >
                 <Crown className="h-4 w-4" />
-                Become a Member
+                Join the AnyPremium Circle
               </Link>
             </motion.div>
           </div>

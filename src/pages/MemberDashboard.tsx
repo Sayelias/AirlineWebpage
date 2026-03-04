@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import {
-  Crown, Star, Gift, ArrowRight, ShoppingBag,
+  Crown, Star, Gift, ArrowRight, Calendar,
   TrendingUp, Clock, ChevronRight, Gem
 } from "lucide-react";
 import Header from "@/components/Header";
@@ -10,37 +10,37 @@ import Footer from "@/components/Footer";
 const mockMember = {
   name: "Alexandra",
   tier: "Gold",
-  points: 14_720,
+  points: 87_500,
   nextTier: "Platinum",
-  nextTierPoints: 25_000,
-  annualSpend: "$18,450",
+  nextTierNights: 40,
+  currentNights: 28,
+  totalNights: 28,
   memberSince: "January 2024",
 };
 
 const recentActivity = [
-  { date: "Feb 28, 2026", action: "Purchase — Aura Pro Headphones", points: "+3,798", type: "earn" },
-  { date: "Feb 14, 2026", action: "Birthday Bonus Reward", points: "+1,500", type: "earn" },
-  { date: "Jan 30, 2026", action: "Redeemed — 10% Off Coupon", points: "-2,500", type: "redeem" },
-  { date: "Jan 15, 2026", action: "Purchase — Nova Wireless Earbuds", points: "+2,598", type: "earn" },
-  { date: "Dec 22, 2025", action: "Holiday Double Points Bonus", points: "+4,200", type: "earn" },
-  { date: "Dec 10, 2025", action: "Purchase — Accessories Bundle", points: "+1,640", type: "earn" },
+  { date: "Feb 28, 2026", action: "Stay — AnyPremium Dubai (5 nights)", points: "+42,500", type: "earn" },
+  { date: "Feb 14, 2026", action: "Spa — Wellness Sanctuary Treatment", points: "+4,500", type: "earn" },
+  { date: "Jan 30, 2026", action: "Redeemed — Suite Upgrade Certificate", points: "-50,000", type: "redeem" },
+  { date: "Jan 15, 2026", action: "Dining — Lumière Degustation for Two", points: "+8,500", type: "earn" },
+  { date: "Dec 22, 2025", action: "Stay — AnyPremium Maldives (7 nights)", points: "+63,000", type: "earn" },
+  { date: "Dec 10, 2025", action: "Complimentary Night Redeemed", points: "-25,000", type: "redeem" },
 ];
 
 const availableRewards = [
-  { title: "10% Off Any Item", points: 2_500, icon: Gift },
-  { title: "$100 Store Credit", points: 5_000, icon: ShoppingBag },
-  { title: "Limited-Edition Accessory", points: 10_000, icon: Gem },
+  { title: "Complimentary Night", points: 25_000, icon: Gift },
+  { title: "Suite Upgrade Certificate", points: 50_000, icon: Calendar },
+  { title: "Spa Retreat Weekend", points: 100_000, icon: Gem },
 ];
 
 const MemberDashboard = () => {
-  const progress = (mockMember.points / mockMember.nextTierPoints) * 100;
-  const pointsToNext = mockMember.nextTierPoints - mockMember.points;
+  const progress = (mockMember.currentNights / mockMember.nextTierNights) * 100;
+  const nightsToNext = mockMember.nextTierNights - mockMember.currentNights;
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
       <main className="pt-20 md:pt-24">
-        {/* Header */}
         <section className="border-b border-border/50 bg-secondary/20 py-10 md:py-14">
           <div className="container">
             <motion.div
@@ -58,10 +58,10 @@ const MemberDashboard = () => {
                     {mockMember.tier} Member
                   </span>
                 </div>
-                <h1 className="font-display text-3xl font-bold tracking-tight md:text-4xl">
+                <h1 className="font-display text-3xl font-bold italic tracking-tight md:text-4xl">
                   Welcome back, {mockMember.name}
                 </h1>
-                <p className="mt-1 font-body text-sm text-muted-foreground">
+                <p className="mt-1 font-body text-base text-muted-foreground">
                   Member since {mockMember.memberSince}
                 </p>
               </div>
@@ -76,11 +76,9 @@ const MemberDashboard = () => {
           </div>
         </section>
 
-        {/* Stats + Progress */}
         <section className="py-10 md:py-14">
           <div className="container">
             <div className="grid gap-6 lg:grid-cols-3">
-              {/* Points Card */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -95,17 +93,16 @@ const MemberDashboard = () => {
                 <p className="mb-1 font-display text-5xl font-bold text-gradient-gold md:text-6xl">
                   {mockMember.points.toLocaleString()}
                 </p>
-                <p className="mb-8 font-body text-sm text-muted-foreground">
+                <p className="mb-8 font-body text-base text-muted-foreground">
                   Available points
                 </p>
 
-                {/* Tier Progress */}
                 <div className="mb-3 flex items-center justify-between">
                   <span className="font-display text-sm font-medium text-primary">
-                    {mockMember.tier}
+                    {mockMember.tier} — {mockMember.currentNights} nights
                   </span>
                   <span className="font-display text-sm font-medium text-muted-foreground">
-                    {mockMember.nextTier}
+                    {mockMember.nextTier} — {mockMember.nextTierNights} nights
                   </span>
                 </div>
                 <div className="mb-3 h-2 overflow-hidden rounded-full bg-secondary">
@@ -116,12 +113,11 @@ const MemberDashboard = () => {
                     className="h-full rounded-full bg-gradient-gold"
                   />
                 </div>
-                <p className="font-body text-xs text-muted-foreground">
-                  {pointsToNext.toLocaleString()} more points to reach {mockMember.nextTier}
+                <p className="font-body text-sm text-muted-foreground">
+                  {nightsToNext} more nights this year to reach {mockMember.nextTier}
                 </p>
               </motion.div>
 
-              {/* Quick Stats */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -130,32 +126,31 @@ const MemberDashboard = () => {
               >
                 <div className="flex-1 rounded-2xl border border-border/50 bg-card p-6">
                   <TrendingUp className="mb-3 h-5 w-5 text-primary" />
-                  <p className="font-body text-xs uppercase tracking-widest text-muted-foreground">
-                    Annual Spend
+                  <p className="font-body text-sm uppercase tracking-widest text-muted-foreground">
+                    Nights This Year
                   </p>
-                  <p className="mt-1 font-display text-2xl font-bold">{mockMember.annualSpend}</p>
+                  <p className="mt-1 font-display text-2xl font-bold">{mockMember.totalNights}</p>
                 </div>
                 <div className="flex-1 rounded-2xl border border-border/50 bg-card p-6">
                   <Clock className="mb-3 h-5 w-5 text-primary" />
-                  <p className="font-body text-xs uppercase tracking-widest text-muted-foreground">
+                  <p className="font-body text-sm uppercase tracking-widest text-muted-foreground">
                     Points Multiplier
                   </p>
-                  <p className="mt-1 font-display text-2xl font-bold text-gradient-gold">2x</p>
-                  <p className="font-body text-xs text-muted-foreground">Gold tier bonus</p>
+                  <p className="mt-1 font-display text-2xl font-bold text-gradient-gold">1.5x</p>
+                  <p className="font-body text-sm text-muted-foreground">Gold tier bonus</p>
                 </div>
               </motion.div>
             </div>
           </div>
         </section>
 
-        {/* Available Rewards */}
         <section className="border-t border-border/50 bg-secondary/20 py-10 md:py-14">
           <div className="container">
             <div className="mb-8 flex items-center justify-between">
-              <h2 className="font-display text-xl font-bold">Available Rewards</h2>
+              <h2 className="font-display text-xl font-bold italic">Available Rewards</h2>
               <Link
                 to="/membership#rewards"
-                className="inline-flex items-center gap-1 font-display text-sm text-muted-foreground hover:text-primary"
+                className="inline-flex items-center gap-1 font-body text-base text-muted-foreground hover:text-primary"
               >
                 View All <ChevronRight className="h-4 w-4" />
               </Link>
@@ -197,10 +192,9 @@ const MemberDashboard = () => {
           </div>
         </section>
 
-        {/* Recent Activity */}
         <section className="py-10 md:py-14">
           <div className="container">
-            <h2 className="mb-8 font-display text-xl font-bold">Recent Activity</h2>
+            <h2 className="mb-8 font-display text-xl font-bold italic">Recent Activity</h2>
             <div className="overflow-hidden rounded-xl border border-border/50">
               {recentActivity.map((item, i) => (
                 <motion.div
@@ -218,8 +212,8 @@ const MemberDashboard = () => {
                       }`}
                     />
                     <div>
-                      <p className="font-body text-sm">{item.action}</p>
-                      <p className="font-body text-xs text-muted-foreground">{item.date}</p>
+                      <p className="font-body text-base">{item.action}</p>
+                      <p className="font-body text-sm text-muted-foreground">{item.date}</p>
                     </div>
                   </div>
                   <span
