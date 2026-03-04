@@ -7,74 +7,74 @@ import Footer from "@/components/Footer";
 
 const faqCategories = [
   {
-    title: "Orders & Shipping",
+    title: "Reservations & Arrivals",
     questions: [
       {
-        q: "How long does shipping take?",
-        a: "Standard shipping within the USA takes 3–5 business days. Australian orders arrive within 5–7 business days. Expedited shipping is available at checkout for next-day or 2-day delivery.",
+        q: "How do I make a reservation?",
+        a: "Reservations can be made through our website, by contacting your nearest AnyPremium property directly, or through your personal concierge. For our Presidential Suite, we recommend booking at least 60 days in advance.",
       },
       {
-        q: "Do you offer free shipping?",
-        a: "Yes! All orders over $100 qualify for free standard shipping across the USA and Australia. Premium members enjoy free expedited shipping on every order.",
+        q: "What is your cancellation policy?",
+        a: "Standard suites may be cancelled up to 72 hours prior to arrival. Premium suites and experiences require 14 days' notice. Platinum members enjoy flexible cancellation on all bookings.",
       },
       {
-        q: "Can I track my order?",
-        a: "Absolutely. Once your order ships, you'll receive an email with a tracking number and a link to follow your package in real time.",
+        q: "Do you offer airport transfers?",
+        a: "All suite reservations include complimentary luxury airport transfers via Rolls-Royce or Mercedes-Maybach. Helicopter transfers are available at select properties and included with our Penthouse and Presidential suites.",
       },
       {
-        q: "Do you ship internationally?",
-        a: "Currently we ship to all 50 US states and across Australia. We're working on expanding to additional countries — stay tuned for updates.",
+        q: "What is your check-in and check-out time?",
+        a: "Check-in begins at 3:00 PM and check-out is at 12:00 PM. Early check-in and late check-out are complimentary for Gold and Platinum members, subject to availability.",
       },
     ],
   },
   {
-    title: "Returns & Warranty",
+    title: "Suites & Amenities",
     questions: [
       {
-        q: "What is your return policy?",
-        a: "We offer a 30-day hassle-free return policy on all products. Items must be in their original packaging and in unused condition. Refunds are processed within 5–7 business days.",
+        q: "What amenities are included in every suite?",
+        a: "Every suite includes Hermès bath amenities, Frette linens, Nespresso machines, complimentary minibar restocked daily, high-speed WiFi, and 24-hour in-room dining. Butler service is available in all premium suites.",
       },
       {
-        q: "How do I initiate a return?",
-        a: "Log into your account, navigate to your order history, and select 'Return Item.' You'll receive a prepaid shipping label via email. You can also visit any of our retail stores for an in-person return.",
+        q: "Can I request specific room configurations?",
+        a: "Absolutely. Our guest relations team will accommodate special requests including pillow menus, mattress preferences, allergen-free rooms, floral arrangements, and pre-arrival shopping for personal items.",
       },
       {
-        q: "What warranty do your products come with?",
-        a: "All AnyCompany Premium products include a 2-year manufacturer warranty covering defects in materials and workmanship. Extended 3-year warranty plans are available at purchase.",
+        q: "Do you accommodate guests with accessibility needs?",
+        a: "Yes. All properties feature fully accessible suites with roll-in showers, lowered fixtures, and assistive technology. Please inform us at booking so we can prepare accordingly.",
       },
     ],
   },
   {
-    title: "Products & Stores",
+    title: "Dining & Experiences",
     questions: [
       {
-        q: "Can I try products before purchasing?",
-        a: "Yes! Visit any of our premium retail stores in New York, Los Angeles, Chicago, San Francisco, Sydney, or Melbourne to experience our full product lineup hands-on.",
+        q: "How do I reserve at your fine dining restaurants?",
+        a: "Reservations at Lumière and our other signature restaurants can be made through the concierge, our website, or your butler. Hotel guests receive priority, and Platinum members enjoy guaranteed seating.",
       },
       {
-        q: "Do you offer trade-in programs?",
-        a: "We offer trade-in value on select electronics. Bring your qualifying device to any retail location for an instant appraisal and credit toward your next purchase.",
+        q: "Can you accommodate dietary requirements?",
+        a: "Our culinary team expertly caters to all dietary needs including vegan, kosher, halal, gluten-free, and allergen-specific menus. Please inform us at least 24 hours in advance for degustation menus.",
       },
       {
-        q: "Are your products covered by price matching?",
-        a: "We stand behind our pricing. If you find an identical product at a lower price from an authorized retailer within 14 days of purchase, we'll match it and refund the difference.",
+        q: "What spa treatments do you offer?",
+        a: "Our Wellness Sanctuary offers over 50 treatments ranging from traditional Thai massage to advanced cryotherapy. All treatments use La Prairie and Sisley products. Bespoke wellness programs are designed by our resident naturopath.",
       },
     ],
   },
   {
-    title: "Account & Payment",
+    title: "Membership & Loyalty",
     questions: [
       {
-        q: "What payment methods do you accept?",
-        a: "We accept all major credit and debit cards (Visa, Mastercard, Amex), PayPal, Apple Pay, Google Pay, and buy-now-pay-later options through Afterpay and Klarna.",
+        q: "How do I join the AnyPremium Circle?",
+        a: "The AnyPremium Circle is complimentary to join. Simply create an account on our website or ask any member of staff during your stay. You begin earning points from your very first booking.",
       },
       {
-        q: "Do you have a loyalty program?",
-        a: "Yes! AnyCompany Rewards lets you earn points on every purchase. Accumulate points for exclusive discounts, early access to new releases, and complimentary services at our stores.",
+        q: "How do I earn and redeem points?",
+        a: "Earn points on room nights, dining, spa treatments, and experiences. Points can be redeemed for complimentary nights, suite upgrades, spa credits, and exclusive experiences. Higher tiers earn at accelerated rates.",
       },
       {
-        q: "How do I reset my password?",
-        a: "Click 'Forgot Password' on the login page, enter your email, and we'll send a secure reset link. For additional help, contact our support team at support@anycompany.com.",
+        q: "What are the membership tiers?",
+        a: "We offer Silver, Gold, and Platinum tiers based on annual nights stayed. Silver begins at enrollment, Gold at 15+ nights, and Platinum at 40+ nights per year. Each tier unlocks progressively more extraordinary privileges.",
       },
     ],
   },
@@ -105,7 +105,7 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
             transition={{ duration: 0.3 }}
             className="overflow-hidden"
           >
-            <p className="pb-5 font-body leading-relaxed text-muted-foreground">{answer}</p>
+            <p className="pb-5 font-body text-lg leading-relaxed text-muted-foreground">{answer}</p>
           </motion.div>
         )}
       </AnimatePresence>
@@ -118,18 +118,16 @@ const FAQ = () => {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="pt-20 md:pt-24">
-        {/* Breadcrumb */}
         <div className="container py-6">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 font-body text-sm text-muted-foreground transition-colors hover:text-foreground"
+            className="inline-flex items-center gap-2 font-body text-base text-muted-foreground transition-colors hover:text-foreground"
           >
             <ArrowLeft className="h-4 w-4" />
             Back to Home
           </Link>
         </div>
 
-        {/* Header */}
         <section className="container pb-16">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -138,18 +136,17 @@ const FAQ = () => {
             className="max-w-2xl"
           >
             <p className="mb-2 font-display text-sm font-medium uppercase tracking-[0.3em] text-primary">
-              Support
+              Guest Services
             </p>
-            <h1 className="mb-4 font-display text-4xl font-bold tracking-tight md:text-5xl">
+            <h1 className="mb-4 font-display text-4xl font-bold italic tracking-tight md:text-5xl">
               Frequently Asked Questions
             </h1>
-            <p className="font-body text-lg text-muted-foreground">
-              Everything you need to know about our products, orders, and services.
+            <p className="font-body text-xl text-muted-foreground">
+              Everything you need to know about your stay with us.
             </p>
           </motion.div>
         </section>
 
-        {/* FAQ Content */}
         <section className="container pb-24 md:pb-32">
           <div className="grid gap-16 lg:grid-cols-2 lg:gap-20">
             {faqCategories.map((category, catIdx) => (
@@ -173,7 +170,6 @@ const FAQ = () => {
           </div>
         </section>
 
-        {/* Contact CTA */}
         <section className="border-t border-border/50 bg-secondary/30 py-16 md:py-20">
           <div className="container text-center">
             <motion.div
@@ -181,15 +177,15 @@ const FAQ = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="mb-3 font-display text-2xl font-bold">Still have questions?</h2>
-              <p className="mb-6 font-body text-muted-foreground">
-                Our support team is ready to help you.
+              <h2 className="mb-3 font-display text-2xl font-bold italic">Still have questions?</h2>
+              <p className="mb-6 font-body text-lg text-muted-foreground">
+                Our concierge team is available 24 hours a day.
               </p>
               <a
-                href="mailto:support@anycompany.com"
+                href="mailto:concierge@anypremium.com"
                 className="inline-flex rounded-full bg-gradient-gold px-8 py-3.5 font-display text-sm font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20"
               >
-                Contact Support
+                Contact Concierge
               </a>
             </motion.div>
           </div>
