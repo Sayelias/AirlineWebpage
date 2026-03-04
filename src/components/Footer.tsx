@@ -13,9 +13,9 @@ const footerLinks: { title: string; links: { label: string; href: string }[] }[]
   {
     title: "Company",
     links: [
+      { label: "Membership", href: "/membership" },
       { label: "About Us", href: "#" },
       { label: "Careers", href: "#" },
-      { label: "Press", href: "#" },
     ],
   },
   {
