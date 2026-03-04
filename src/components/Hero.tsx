@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import heroImage from "@/assets/hero-hotel.webp";
+import BookingDialog from "@/components/BookingDialog";
 
 const Hero = () => {
   return (
@@ -53,13 +54,12 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.45 }}
             className="flex flex-wrap gap-4"
           >
-            <a
-              href="#properties"
-              className="group inline-flex items-center gap-2 rounded-full bg-gradient-gold px-8 py-3.5 font-display text-sm font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20"
-            >
-              Explore Properties
-              <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-            </a>
+            <BookingDialog>
+              <button className="group inline-flex items-center gap-2 rounded-full bg-gradient-gold px-8 py-3.5 font-display text-sm font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20">
+                Reserve Your Stay
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+              </button>
+            </BookingDialog>
             <a
               href="#destinations"
               className="inline-flex items-center gap-2 rounded-full border border-border px-8 py-3.5 font-display text-sm font-medium text-foreground transition-all hover:border-primary/50 hover:bg-secondary"
