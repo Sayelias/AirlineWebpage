@@ -9,6 +9,7 @@ import FAQ from "./pages/FAQ";
 import Membership from "./pages/Membership";
 import MemberDashboard from "./pages/MemberDashboard";
 import NotFound from "./pages/NotFound";
+import VoiceAssistant from "./components/VoiceAssistant";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/membership/dashboard" element={<MemberDashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <VoiceAssistant />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
