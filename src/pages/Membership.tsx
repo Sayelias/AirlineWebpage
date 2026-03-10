@@ -6,88 +6,88 @@ import Footer from "@/components/Footer";
 
 const tiers = [
   {
-    name: "Silver",
+    name: "Blue",
     icon: Star,
     requirement: "Upon enrollment",
-    nightsRequired: "0+ nights",
-    color: "from-zinc-400 to-zinc-300",
-    textColor: "text-zinc-300",
-    borderColor: "border-zinc-700",
+    milesRequired: "0+ miles",
+    color: "from-blue-400 to-blue-300",
+    textColor: "text-blue-300",
+    borderColor: "border-blue-700",
     benefits: [
-      "Complimentary welcome amenity",
-      "Earn 10 points per $1 spent",
-      "Complimentary WiFi & daily newspaper",
-      "Late check-out upon availability",
-      "Members-only rates",
+      "Earn 5 miles per $1 spent on flights",
+      "Online check-in & seat selection",
+      "Complimentary snacks on all flights",
+      "Access to mobile boarding passes",
+      "Member-only fare alerts",
+    ],
+  },
+  {
+    name: "Silver",
+    icon: Crown,
+    requirement: "25,000+ miles per year",
+    milesRequired: "25,000+ miles",
+    color: "from-slate-400 to-zinc-300",
+    textColor: "text-zinc-300",
+    borderColor: "border-zinc-600",
+    featured: true,
+    benefits: [
+      "Earn 8 miles per $1 spent on flights",
+      "1 free checked bag on all flights",
+      "Priority check-in & boarding",
+      "Preferred seating at booking",
+      "Complimentary same-day standby",
+      "Lounge access passes (4 per year)",
+      "Dedicated customer service line",
     ],
   },
   {
     name: "Gold",
-    icon: Crown,
-    requirement: "15+ nights per year",
-    nightsRequired: "15+ nights",
-    color: "from-amber-500 to-yellow-400",
-    textColor: "text-primary",
-    borderColor: "border-primary/40",
-    featured: true,
-    benefits: [
-      "Guaranteed suite upgrade",
-      "Earn 15 points per $1 spent",
-      "Complimentary breakfast for two",
-      "Early check-in & late check-out guaranteed",
-      "Complimentary pressing service",
-      "Access to Executive Lounge",
-      "Dedicated reservations line",
-    ],
-  },
-  {
-    name: "Platinum",
     icon: Diamond,
-    requirement: "40+ nights per year",
-    nightsRequired: "40+ nights",
-    color: "from-sky-300 to-indigo-300",
-    textColor: "text-sky-300",
-    borderColor: "border-sky-500/40",
+    requirement: "75,000+ miles per year",
+    milesRequired: "75,000+ miles",
+    color: "from-amber-400 to-yellow-300",
+    textColor: "text-amber-300",
+    borderColor: "border-amber-500/40",
     benefits: [
-      "Two-category suite upgrade guaranteed",
-      "Earn 20 points per $1 spent",
-      "Annual complimentary weekend stay",
-      "Priority restaurant reservations",
-      "Complimentary airport transfers worldwide",
-      "Personal concierge at every property",
-      "Invitation to annual Platinum Gala",
-      "Spa credit — $500 per stay",
+      "Earn 12 miles per $1 spent on flights",
+      "Complimentary cabin upgrades (when available)",
+      "Unlimited lounge access worldwide",
+      "3 free checked bags on all flights",
+      "Priority baggage handling",
+      "Guaranteed economy seat on sold-out flights",
+      "Companion upgrade certificates (2 per year)",
+      "Global partner airline lounge access",
     ],
   },
 ];
 
 const rewards = [
-  { points: "25,000", reward: "Complimentary Night — Standard Suite", icon: Gift },
-  { points: "50,000", reward: "Suite Upgrade Certificate", icon: Sparkles },
-  { points: "100,000", reward: "Spa Retreat Weekend for Two", icon: Gem },
-  { points: "200,000", reward: "Presidential Suite — 3-Night Experience", icon: Diamond },
+  { miles: "10,000", reward: "Domestic Economy Round Trip", icon: Gift },
+  { miles: "35,000", reward: "International Economy Round Trip", icon: Sparkles },
+  { miles: "75,000", reward: "Business Class Upgrade", icon: Gem },
+  { miles: "150,000", reward: "First Class Round Trip", icon: Diamond },
 ];
 
 const howItWorks = [
   {
     step: "01",
-    title: "Join the Circle",
-    description: "Enrollment is complimentary. Create your AnyPremium Circle account.",
+    title: "Sign Up Free",
+    description: "Join SkyRewards in minutes. Start earning miles from your very first flight.",
   },
   {
     step: "02",
-    title: "Stay & Experience",
-    description: "Earn points on every night, meal, spa visit, and experience across all properties.",
+    title: "Fly & Earn",
+    description: "Earn miles on every flight, plus with partner airlines, hotels, and credit cards.",
   },
   {
     step: "03",
     title: "Redeem Rewards",
-    description: "Exchange points for complimentary nights, upgrades, and bespoke experiences.",
+    description: "Use miles for free flights, upgrades, lounge access, and partner perks.",
   },
   {
     step: "04",
-    title: "Ascend Tiers",
-    description: "Your annual nights stayed elevate your tier and unlock richer privileges.",
+    title: "Rise Through Tiers",
+    description: "Fly more to unlock elite status with increasingly extraordinary benefits.",
   },
 ];
 
@@ -107,26 +107,25 @@ const Membership = () => {
               className="mx-auto max-w-3xl text-center"
             >
               <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-1.5">
-                <Crown className="h-4 w-4 text-primary" />
+                <Plane className="h-4 w-4 text-primary" />
                 <span className="font-display text-xs font-semibold uppercase tracking-widest text-primary">
-                  Exclusive Membership
+                  Frequent Flyer Program
                 </span>
               </div>
-              <h1 className="mb-6 font-display text-4xl font-bold italic leading-tight tracking-tight md:text-6xl">
-                The{" "}
-                <span className="text-gradient-gold">AnyPremium</span>{" "}
-                Circle
+              <h1 className="mb-6 font-display text-4xl font-bold leading-tight tracking-tight md:text-6xl">
+                <span className="text-gradient-sky">SkyRewards</span>{" "}
+                by AnyCompany
               </h1>
               <p className="mb-10 font-body text-xl leading-relaxed text-muted-foreground md:text-2xl">
-                An invitation to a world of unmatched hospitality, curated experiences,
-                and privileges reserved for our most valued guests.
+                Every mile you fly brings you closer to your next reward.
+                Join millions of members earning free flights, upgrades, and exclusive perks.
               </p>
               <div className="flex flex-wrap justify-center gap-4">
                 <Link
                   to="/membership/dashboard"
-                  className="group inline-flex items-center gap-2 rounded-full bg-gradient-gold px-8 py-3.5 font-display text-sm font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20"
+                  className="group inline-flex items-center gap-2 rounded-full bg-gradient-sky px-8 py-3.5 font-display text-sm font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20"
                 >
-                  Join the Circle
+                  Join SkyRewards
                   <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </Link>
                 <a
@@ -152,7 +151,7 @@ const Membership = () => {
               <p className="mb-2 font-display text-sm font-medium uppercase tracking-[0.3em] text-primary">
                 Simple & Rewarding
               </p>
-              <h2 className="font-display text-3xl font-bold italic tracking-tight md:text-5xl">
+              <h2 className="font-display text-3xl font-bold tracking-tight md:text-5xl">
                 How It Works
               </h2>
             </motion.div>
@@ -167,7 +166,7 @@ const Membership = () => {
                   transition={{ delay: i * 0.1 }}
                   className="text-center"
                 >
-                  <span className="mb-4 inline-block font-display text-4xl font-bold text-gradient-gold">
+                  <span className="mb-4 inline-block font-display text-4xl font-bold text-gradient-sky">
                     {item.step}
                   </span>
                   <h3 className="mb-2 font-display text-lg font-semibold">{item.title}</h3>
@@ -190,13 +189,13 @@ const Membership = () => {
               className="mb-16 text-center"
             >
               <p className="mb-2 font-display text-sm font-medium uppercase tracking-[0.3em] text-primary">
-                Membership Tiers
+                Elite Status Tiers
               </p>
-              <h2 className="mb-4 font-display text-3xl font-bold italic tracking-tight md:text-5xl">
-                Your Journey Awaits
+              <h2 className="mb-4 font-display text-3xl font-bold tracking-tight md:text-5xl">
+                Fly More, Earn More
               </h2>
               <p className="mx-auto max-w-md font-body text-lg text-muted-foreground">
-                Each tier is defined by annual nights stayed. The more you stay, the more extraordinary the privileges.
+                Your annual miles flown determine your tier. The higher you fly, the more you're rewarded.
               </p>
             </motion.div>
 
@@ -208,14 +207,14 @@ const Membership = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: i * 0.12 }}
-                  className={`relative rounded-2xl border bg-card p-8 transition-all hover:glow-gold ${
+                  className={`relative rounded-2xl border bg-card p-8 transition-all hover:glow-sky ${
                     tier.featured
                       ? "border-primary/50 ring-1 ring-primary/20"
                       : tier.borderColor
                   }`}
                 >
                   {tier.featured && (
-                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-gold px-4 py-1 font-display text-xs font-bold text-primary-foreground">
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-gradient-sky px-4 py-1 font-display text-xs font-bold text-primary-foreground">
                       Most Popular
                     </div>
                   )}
@@ -256,9 +255,9 @@ const Membership = () => {
               className="mb-16 text-center"
             >
               <p className="mb-2 font-display text-sm font-medium uppercase tracking-[0.3em] text-primary">
-                Redeem Your Points
+                Use Your Miles
               </p>
-              <h2 className="font-display text-3xl font-bold italic tracking-tight md:text-5xl">
+              <h2 className="font-display text-3xl font-bold tracking-tight md:text-5xl">
                 Rewards
               </h2>
             </motion.div>
@@ -266,7 +265,7 @@ const Membership = () => {
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {rewards.map((r, i) => (
                 <motion.div
-                  key={r.points}
+                  key={r.miles}
                   initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
@@ -274,11 +273,11 @@ const Membership = () => {
                   className="rounded-xl border border-border/50 bg-card p-6 text-center transition-all hover:border-primary/30"
                 >
                   <r.icon className="mx-auto mb-4 h-8 w-8 text-primary" />
-                  <p className="mb-2 font-display text-2xl font-bold text-gradient-gold">
-                    {r.points}
+                  <p className="mb-2 font-display text-2xl font-bold text-gradient-sky">
+                    {r.miles}
                   </p>
                   <p className="font-body text-sm uppercase tracking-widest text-muted-foreground">
-                    Points
+                    Miles
                   </p>
                   <p className="mt-3 font-body text-base text-foreground">{r.reward}</p>
                 </motion.div>
@@ -292,10 +291,10 @@ const Membership = () => {
           <div className="container">
             <div className="grid gap-6 rounded-2xl border border-primary/20 bg-card p-8 sm:grid-cols-2 lg:grid-cols-4">
               {[
-                { icon: Plane, label: "Airport Transfers", desc: "Complimentary luxury transfers" },
-                { icon: Shield, label: "Best Rate Guarantee", desc: "Always the lowest member rate" },
-                { icon: Gift, label: "Welcome Amenities", desc: "Curated arrival gifts" },
-                { icon: Crown, label: "Exclusive Events", desc: "Galas, tastings & cultural experiences" },
+                { icon: Plane, label: "Global Network", desc: "200+ destinations worldwide" },
+                { icon: Shield, label: "Flexible Booking", desc: "Free changes up to 24hrs before" },
+                { icon: Gift, label: "Partner Earning", desc: "Earn miles with 50+ partners" },
+                { icon: Crown, label: "Exclusive Access", desc: "Lounges, upgrades & priority" },
               ].map((perk, i) => (
                 <motion.div
                   key={perk.label}
@@ -326,18 +325,18 @@ const Membership = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="mb-3 font-display text-2xl font-bold italic md:text-3xl">
-                Begin your journey with us
+              <h2 className="mb-3 font-display text-2xl font-bold md:text-3xl">
+                Ready to start earning?
               </h2>
               <p className="mb-8 font-body text-lg text-muted-foreground">
-                Join an exclusive circle of travelers who expect nothing less than extraordinary.
+                Join SkyRewards today — it's free and takes less than a minute.
               </p>
               <Link
                 to="/membership/dashboard"
-                className="inline-flex items-center gap-2 rounded-full bg-gradient-gold px-10 py-4 font-display text-sm font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20"
+                className="inline-flex items-center gap-2 rounded-full bg-gradient-sky px-10 py-4 font-display text-sm font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20"
               >
-                <Crown className="h-4 w-4" />
-                Join the AnyPremium Circle
+                <Plane className="h-4 w-4" />
+                Join SkyRewards Free
               </Link>
             </motion.div>
           </div>

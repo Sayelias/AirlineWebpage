@@ -1,40 +1,39 @@
 import { Link } from "react-router-dom";
+import { Plane } from "lucide-react";
 
 const footerLinks = [
   {
-    title: "Properties",
+    title: "Fly With Us",
     links: [
-      { label: "Dubai", href: "#" },
-      { label: "Paris", href: "#" },
-      { label: "New York", href: "#" },
-      { label: "Tokyo", href: "#" },
-      { label: "Sydney", href: "#" },
-      { label: "Maldives", href: "#" },
+      { label: "Book a Flight", href: "#" },
+      { label: "Check-in Online", href: "#" },
+      { label: "Flight Status", href: "#" },
+      { label: "Route Map", href: "/#destinations" },
     ],
   },
   {
-    title: "Experiences",
+    title: "Travel Experience",
     links: [
-      { label: "Suites", href: "/#properties" },
-      { label: "Dining", href: "/properties/gastronomic-experience" },
-      { label: "Spa & Wellness", href: "/properties/wellness-sanctuary" },
-      { label: "Membership", href: "/membership" },
+      { label: "Cabin Classes", href: "/#properties" },
+      { label: "In-Flight Dining", href: "/properties/first-class" },
+      { label: "Airport Lounges", href: "/properties/business-class" },
+      { label: "SkyRewards", href: "/membership" },
     ],
   },
   {
-    title: "Guest Services",
+    title: "Support",
     links: [
-      { label: "Concierge", href: "#" },
+      { label: "Help Center", href: "#" },
       { label: "FAQ", href: "/faq" },
-      { label: "Accessibility", href: "#" },
-      { label: "Gift Cards", href: "#" },
+      { label: "Baggage Info", href: "#" },
+      { label: "Special Assistance", href: "#" },
     ],
   },
   {
     title: "Legal",
     links: [
       { label: "Privacy Policy", href: "#" },
-      { label: "Terms of Service", href: "#" },
+      { label: "Terms & Conditions", href: "#" },
       { label: "Cookie Policy", href: "#" },
     ],
   },
@@ -46,11 +45,12 @@ const Footer = () => {
       <div className="container">
         <div className="mb-12 grid gap-10 md:grid-cols-5">
           <div className="md:col-span-1">
-            <Link to="/" className="font-display text-lg font-bold">
-              <span className="text-gradient-gold">AnyPremium</span>
+            <Link to="/" className="flex items-center gap-2 font-display text-lg font-bold">
+              <Plane className="h-4 w-4 text-primary" />
+              <span className="text-gradient-sky">AnyCompany</span>
             </Link>
             <p className="mt-3 font-body text-base leading-relaxed text-muted-foreground">
-              Six-star hospitality, redefined for the world's most discerning travelers.
+              Connecting the world with exceptional service, comfort, and reliability.
             </p>
           </div>
 
@@ -77,10 +77,10 @@ const Footer = () => {
 
         <div className="flex flex-col items-center justify-between gap-4 border-t border-border/50 pt-8 md:flex-row">
           <p className="font-body text-sm text-muted-foreground">
-            © {new Date().getFullYear()} AnyPremium Hotels. All rights reserved.
+            © {new Date().getFullYear()} AnyCompany Airlines. All rights reserved.
           </p>
           <div className="flex gap-6">
-            {["Instagram", "Facebook", "LinkedIn"].map((social) => (
+            {["Twitter", "Instagram", "LinkedIn"].map((social) => (
               <a
                 key={social}
                 href="#"

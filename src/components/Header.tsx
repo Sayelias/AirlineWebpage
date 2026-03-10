@@ -1,13 +1,13 @@
 import { useState } from "react";
-import { Menu, X, User } from "lucide-react";
+import { Menu, X, User, Plane } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 import BookingDialog from "@/components/BookingDialog";
 
 const navLinks = [
-  { label: "Properties", href: "/#properties" },
-  { label: "Destinations", href: "/#destinations" },
-  { label: "Membership", href: "/membership" },
+  { label: "Cabin Classes", href: "/#properties" },
+  { label: "Routes", href: "/#destinations" },
+  { label: "SkyRewards", href: "/membership" },
   { label: "FAQ", href: "/faq" },
 ];
 
@@ -17,9 +17,10 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-xl">
       <div className="container flex h-16 items-center justify-between md:h-20">
-        <Link to="/" className="font-display text-lg font-bold tracking-tight md:text-xl">
-          <span className="text-gradient-gold">AnyPremium</span>{" "}
-          <span className="font-light text-foreground">Hotels</span>
+        <Link to="/" className="flex items-center gap-2 font-display text-lg font-bold tracking-tight md:text-xl">
+          <Plane className="h-5 w-5 text-primary" />
+          <span className="text-gradient-sky">AnyCompany</span>{" "}
+          <span className="font-light text-foreground">Airlines</span>
         </Link>
 
         <nav className="hidden items-center gap-8 md:flex">
@@ -35,12 +36,12 @@ const Header = () => {
         </nav>
 
         <div className="flex items-center gap-4">
-          <Link to="/membership/dashboard" className="text-muted-foreground transition-colors hover:text-foreground" aria-label="Member Portal">
+          <Link to="/membership/dashboard" className="text-muted-foreground transition-colors hover:text-foreground" aria-label="My Trips">
             <User className="h-5 w-5" />
           </Link>
           <BookingDialog>
-            <button className="hidden rounded-full bg-gradient-gold px-6 py-2 font-display text-xs font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20 md:inline-flex">
-              Reserve Now
+            <button className="hidden rounded-full bg-gradient-sky px-6 py-2 font-display text-xs font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20 md:inline-flex">
+              Book a Flight
             </button>
           </BookingDialog>
           <button

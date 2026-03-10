@@ -7,74 +7,74 @@ import Footer from "@/components/Footer";
 
 const faqCategories = [
   {
-    title: "Reservations & Arrivals",
+    title: "Booking & Check-in",
     questions: [
       {
-        q: "How do I make a reservation?",
-        a: "Reservations can be made through our website, by contacting your nearest AnyPremium property directly, or through your personal concierge. For our Presidential Suite, we recommend booking at least 60 days in advance.",
+        q: "How do I book a flight?",
+        a: "You can book flights through our website, mobile app, or by calling our reservations team. We accept all major credit cards and offer flexible payment options including buy-now-pay-later.",
+      },
+      {
+        q: "When can I check in online?",
+        a: "Online check-in opens 24 hours before departure and closes 1 hour before. You can check in via our website or mobile app and receive your mobile boarding pass directly.",
       },
       {
         q: "What is your cancellation policy?",
-        a: "Standard suites may be cancelled up to 72 hours prior to arrival. Premium suites and experiences require 14 days' notice. Platinum members enjoy flexible cancellation on all bookings.",
+        a: "All tickets can be changed free of charge up to 24 hours before departure. Refund policies vary by fare class — Flex fares are fully refundable, while Saver fares may incur a change fee.",
       },
       {
-        q: "Do you offer airport transfers?",
-        a: "All suite reservations include complimentary luxury airport transfers via Rolls-Royce or Mercedes-Maybach. Helicopter transfers are available at select properties and included with our Penthouse and Presidential suites.",
-      },
-      {
-        q: "What is your check-in and check-out time?",
-        a: "Check-in begins at 3:00 PM and check-out is at 12:00 PM. Early check-in and late check-out are complimentary for Gold and Platinum members, subject to availability.",
+        q: "Can I select my seat in advance?",
+        a: "Yes. Seat selection is complimentary for Business and First Class passengers. Economy and Premium Economy passengers can select seats for a small fee, or free of charge for SkyRewards Silver and Gold members.",
       },
     ],
   },
   {
-    title: "Suites & Amenities",
+    title: "Baggage & Travel",
     questions: [
       {
-        q: "What amenities are included in every suite?",
-        a: "Every suite includes Hermès bath amenities, Frette linens, Nespresso machines, complimentary minibar restocked daily, high-speed WiFi, and 24-hour in-room dining. Butler service is available in all premium suites.",
+        q: "What is your baggage allowance?",
+        a: "Economy: 1 × 23kg checked bag + 1 carry-on. Premium Economy: 2 × 23kg. Business: 2 × 32kg. First Class: 3 × 32kg. All classes include one carry-on bag and one personal item.",
       },
       {
-        q: "Can I request specific room configurations?",
-        a: "Absolutely. Our guest relations team will accommodate special requests including pillow menus, mattress preferences, allergen-free rooms, floral arrangements, and pre-arrival shopping for personal items.",
+        q: "Can I bring special items?",
+        a: "Musical instruments, sports equipment, and other oversized items can be checked or brought on board (if they fit in an overhead bin). Additional fees may apply. Contact us at least 48 hours before departure.",
       },
       {
-        q: "Do you accommodate guests with accessibility needs?",
-        a: "Yes. All properties feature fully accessible suites with roll-in showers, lowered fixtures, and assistive technology. Please inform us at booking so we can prepare accordingly.",
+        q: "What about traveling with children?",
+        a: "Children under 2 may travel on a parent's lap at a reduced fare. Unaccompanied minors (ages 5-14) can fly with our dedicated care service. Family pre-boarding is available on all flights.",
       },
     ],
   },
   {
-    title: "Dining & Experiences",
+    title: "In-Flight Experience",
     questions: [
       {
-        q: "How do I reserve at your fine dining restaurants?",
-        a: "Reservations at Lumière and our other signature restaurants can be made through the concierge, our website, or your butler. Hotel guests receive priority, and Platinum members enjoy guaranteed seating.",
+        q: "Do you offer in-flight Wi-Fi?",
+        a: "Yes, Wi-Fi is available on all long-haul aircraft and most domestic flights. It's complimentary for Business and First Class, and for SkyRewards Gold members. Packages are available for purchase in Economy.",
       },
       {
-        q: "Can you accommodate dietary requirements?",
-        a: "Our culinary team expertly caters to all dietary needs including vegan, kosher, halal, gluten-free, and allergen-specific menus. Please inform us at least 24 hours in advance for degustation menus.",
+        q: "What meals are served on board?",
+        a: "Complimentary meals are served on all flights over 3 hours. Business and First Class enjoy multi-course dining with wine pairings. Special dietary meals (vegetarian, kosher, halal, gluten-free) can be requested at booking.",
       },
       {
-        q: "What spa treatments do you offer?",
-        a: "Our Wellness Sanctuary offers over 50 treatments ranging from traditional Thai massage to advanced cryotherapy. All treatments use La Prairie and Sisley products. Bespoke wellness programs are designed by our resident naturopath.",
+        q: "What entertainment is available?",
+        a: "Every seat has a personal seatback screen with over 1,000 movies, TV shows, music albums, podcasts, and games. Content is refreshed monthly. Noise-cancelling headphones are provided in Business and First Class.",
       },
     ],
   },
   {
-    title: "Membership & Loyalty",
+    title: "SkyRewards & Loyalty",
     questions: [
       {
-        q: "How do I join the AnyPremium Circle?",
-        a: "The AnyPremium Circle is complimentary to join. Simply create an account on our website or ask any member of staff during your stay. You begin earning points from your very first booking.",
+        q: "How do I join SkyRewards?",
+        a: "SkyRewards is free to join. Simply create an account on our website or app. You'll start earning miles from your very first flight, and miles never expire as long as you fly with us once every 18 months.",
       },
       {
-        q: "How do I earn and redeem points?",
-        a: "Earn points on room nights, dining, spa treatments, and experiences. Points can be redeemed for complimentary nights, suite upgrades, spa credits, and exclusive experiences. Higher tiers earn at accelerated rates.",
+        q: "How do I earn and redeem miles?",
+        a: "Earn miles on every flight based on distance and cabin class. You can also earn with 50+ partner airlines, hotels, and credit cards. Redeem for free flights, upgrades, lounge passes, and more.",
       },
       {
-        q: "What are the membership tiers?",
-        a: "We offer Silver, Gold, and Platinum tiers based on annual nights stayed. Silver begins at enrollment, Gold at 15+ nights, and Platinum at 40+ nights per year. Each tier unlocks progressively more extraordinary privileges.",
+        q: "What are the SkyRewards tiers?",
+        a: "We offer Blue (entry), Silver (25,000+ miles/year), and Gold (75,000+ miles/year) tiers. Silver includes priority boarding and free checked bags. Gold adds complimentary upgrades and unlimited lounge access.",
       },
     ],
   },
@@ -136,13 +136,13 @@ const FAQ = () => {
             className="max-w-2xl"
           >
             <p className="mb-2 font-display text-sm font-medium uppercase tracking-[0.3em] text-primary">
-              Guest Services
+              Help Center
             </p>
-            <h1 className="mb-4 font-display text-4xl font-bold italic tracking-tight md:text-5xl">
+            <h1 className="mb-4 font-display text-4xl font-bold tracking-tight md:text-5xl">
               Frequently Asked Questions
             </h1>
             <p className="font-body text-xl text-muted-foreground">
-              Everything you need to know about your stay with us.
+              Everything you need to know about flying with AnyCompany Airlines.
             </p>
           </motion.div>
         </section>
@@ -157,7 +157,7 @@ const FAQ = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: catIdx * 0.1 }}
               >
-                <h2 className="mb-6 font-display text-xl font-bold text-gradient-gold">
+                <h2 className="mb-6 font-display text-xl font-bold text-gradient-sky">
                   {category.title}
                 </h2>
                 <div>
@@ -177,15 +177,15 @@ const FAQ = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
             >
-              <h2 className="mb-3 font-display text-2xl font-bold italic">Still have questions?</h2>
+              <h2 className="mb-3 font-display text-2xl font-bold">Still have questions?</h2>
               <p className="mb-6 font-body text-lg text-muted-foreground">
-                Our concierge team is available 24 hours a day.
+                Our support team is available 24/7.
               </p>
               <a
-                href="mailto:concierge@anypremium.com"
-                className="inline-flex rounded-full bg-gradient-gold px-8 py-3.5 font-display text-sm font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20"
+                href="mailto:support@anycompanyairlines.com"
+                className="inline-flex rounded-full bg-gradient-sky px-8 py-3.5 font-display text-sm font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20"
               >
-                Contact Concierge
+                Contact Support
               </a>
             </motion.div>
           </div>
