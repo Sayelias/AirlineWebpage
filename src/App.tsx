@@ -9,6 +9,7 @@ import FAQ from "./pages/FAQ";
 import Membership from "./pages/Membership";
 import MemberDashboard from "./pages/MemberDashboard";
 import NotFound from "./pages/NotFound";
+import VoiceAssistant from "./components/VoiceAssistant";
 
 const queryClient = new QueryClient();
 
