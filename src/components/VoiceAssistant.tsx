@@ -21,14 +21,12 @@ const VoiceAssistant = () => {
       console.error("Voice error:", error);
       setIsConnecting(false);
     },
-    onMessage: (message) => {
+    onMessage: (message: any) => {
       if (message.type === "user_transcript") {
-        const evt = message as any;
-        const text = evt.user_transcription_event?.user_transcript;
+        const text = message.user_transcription_event?.user_transcript;
         if (text) setTranscript((prev) => [...prev, { role: "user", text }]);
       } else if (message.type === "agent_response") {
-        const evt = message as any;
-        const text = evt.agent_response_event?.agent_response;
+        const text = message.agent_response_event?.agent_response;
         if (text) setTranscript((prev) => [...prev, { role: "agent", text }]);
       }
     },
