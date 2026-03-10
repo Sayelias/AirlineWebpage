@@ -44,7 +44,7 @@ const VoiceAssistant = () => {
       await navigator.mediaDevices.getUserMedia({ audio: true });
       await conversation.startSession({
         agentId: AGENT_ID,
-      });
+      } as any);
     } catch (error) {
       console.error("Failed to start:", error);
       setIsConnecting(false);
