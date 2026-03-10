@@ -27,6 +27,7 @@ const App = () => (
           <Route path="/membership/dashboard" element={<MemberDashboard />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
+        <VoiceAssistant />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
