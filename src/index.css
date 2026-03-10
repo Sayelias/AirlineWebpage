@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,52 +6,52 @@
 
 @layer base {
   :root {
-    --background: 30 10% 4%;
-    --foreground: 40 20% 93%;
+    --background: 216 28% 7%;
+    --foreground: 210 20% 95%;
 
-    --card: 30 8% 7%;
-    --card-foreground: 40 20% 93%;
+    --card: 216 24% 10%;
+    --card-foreground: 210 20% 95%;
 
-    --popover: 30 8% 7%;
-    --popover-foreground: 40 20% 93%;
+    --popover: 216 24% 10%;
+    --popover-foreground: 210 20% 95%;
 
-    --primary: 36 55% 55%;
-    --primary-foreground: 30 10% 4%;
+    --primary: 210 100% 56%;
+    --primary-foreground: 216 28% 7%;
 
-    --secondary: 30 6% 11%;
-    --secondary-foreground: 40 15% 80%;
+    --secondary: 216 18% 14%;
+    --secondary-foreground: 210 15% 80%;
 
-    --muted: 30 5% 14%;
-    --muted-foreground: 30 8% 50%;
+    --muted: 216 14% 18%;
+    --muted-foreground: 215 12% 50%;
 
-    --accent: 36 55% 55%;
-    --accent-foreground: 30 10% 4%;
+    --accent: 210 100% 56%;
+    --accent-foreground: 216 28% 7%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 30 6% 15%;
-    --input: 30 6% 15%;
-    --ring: 36 55% 55%;
+    --border: 216 14% 18%;
+    --input: 216 14% 18%;
+    --ring: 210 100% 56%;
 
     --radius: 0.5rem;
 
-    --gold: 36 55% 55%;
-    --gold-light: 38 65% 68%;
-    --gold-dark: 34 45% 38%;
-    --surface-elevated: 30 6% 9%;
+    --sky: 210 100% 56%;
+    --sky-light: 205 90% 68%;
+    --sky-dark: 215 80% 40%;
+    --surface-elevated: 216 20% 12%;
 
-    --font-display: 'Playfair Display', serif;
-    --font-body: 'Cormorant Garamond', serif;
+    --font-display: 'Plus Jakarta Sans', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
 
-    --sidebar-background: 30 8% 5%;
-    --sidebar-foreground: 40 20% 93%;
-    --sidebar-primary: 36 55% 55%;
-    --sidebar-primary-foreground: 30 10% 4%;
-    --sidebar-accent: 30 6% 11%;
-    --sidebar-accent-foreground: 40 15% 80%;
-    --sidebar-border: 30 6% 15%;
-    --sidebar-ring: 36 55% 55%;
+    --sidebar-background: 216 24% 8%;
+    --sidebar-foreground: 210 20% 95%;
+    --sidebar-primary: 210 100% 56%;
+    --sidebar-primary-foreground: 216 28% 7%;
+    --sidebar-accent: 216 18% 14%;
+    --sidebar-accent-foreground: 210 15% 80%;
+    --sidebar-border: 216 14% 18%;
+    --sidebar-ring: 210 100% 56%;
   }
 }
 
@@ -71,20 +71,33 @@
 }
 
 @layer utilities {
-  .text-gradient-gold {
+  .text-gradient-sky {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(38 65% 68%), hsl(36 55% 55%), hsl(34 45% 38%));
+    background-image: linear-gradient(135deg, hsl(205 90% 68%), hsl(210 100% 56%), hsl(215 80% 40%));
+  }
+
+  .bg-gradient-sky {
+    background-image: linear-gradient(135deg, hsl(205 90% 68%), hsl(210 100% 56%));
+  }
+
+  .glow-sky {
+    box-shadow: 0 0 50px -12px hsl(210 100% 56% / 0.25);
+  }
+
+  .border-gradient-sky {
+    border-image: linear-gradient(135deg, hsl(205 90% 68%), hsl(215 80% 40%)) 1;
+  }
+
+  /* Keep old utility names as aliases for transition */
+  .text-gradient-gold {
+    @apply text-gradient-sky;
   }
 
   .bg-gradient-gold {
-    background-image: linear-gradient(135deg, hsl(38 65% 68%), hsl(36 55% 55%));
+    @apply bg-gradient-sky;
   }
 
   .glow-gold {
-    box-shadow: 0 0 50px -12px hsl(36 55% 55% / 0.25);
-  }
-
-  .border-gradient-gold {
-    border-image: linear-gradient(135deg, hsl(38 65% 68%), hsl(34 45% 38%)) 1;
+    @apply glow-sky;
   }
 }

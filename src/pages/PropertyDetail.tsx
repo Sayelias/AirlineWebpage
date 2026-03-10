@@ -1,6 +1,6 @@
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { ArrowLeft, Calendar, Shield, Sparkles } from "lucide-react";
+import { ArrowLeft, Plane, Shield, Sparkles } from "lucide-react";
 import BookingDialog from "@/components/BookingDialog";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
@@ -16,8 +16,8 @@ const PropertyDetail = () => {
         <Header />
         <div className="flex flex-1 items-center justify-center pt-20">
           <div className="text-center">
-            <h1 className="mb-4 font-display text-3xl font-bold">Property Not Found</h1>
-            <Link to="/" className="font-body text-primary underline underline-offset-4 hover:text-gold-light">
+            <h1 className="mb-4 font-display text-3xl font-bold">Cabin Class Not Found</h1>
+            <Link to="/" className="font-body text-primary underline underline-offset-4 hover:text-sky-light">
               Return Home
             </Link>
           </div>
@@ -69,10 +69,10 @@ const PropertyDetail = () => {
               <p className="mb-2 font-display text-sm font-medium uppercase tracking-[0.3em] text-primary">
                 {property.category}
               </p>
-              <h1 className="mb-3 font-display text-4xl font-bold italic tracking-tight md:text-5xl">
+              <h1 className="mb-3 font-display text-4xl font-bold tracking-tight md:text-5xl">
                 {property.name}
               </h1>
-              <p className="mb-6 font-display text-xl text-gradient-gold">
+              <p className="mb-6 font-display text-xl text-gradient-sky">
                 {property.tagline}
               </p>
               <p className="mb-8 max-w-lg font-body text-lg leading-relaxed text-muted-foreground">
@@ -85,28 +85,28 @@ const PropertyDetail = () => {
 
               <div className="mb-8 flex flex-wrap gap-3">
                 <BookingDialog defaultSuite={property.name}>
-                  <button className="inline-flex items-center gap-2 rounded-full bg-gradient-gold px-8 py-3.5 font-display text-sm font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20">
-                    <Calendar className="h-4 w-4" />
-                    Reserve Now
+                  <button className="inline-flex items-center gap-2 rounded-full bg-gradient-sky px-8 py-3.5 font-display text-sm font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20">
+                    <Plane className="h-4 w-4" />
+                    Book This Class
                   </button>
                 </BookingDialog>
                 <button className="rounded-full border border-border px-8 py-3.5 font-display text-sm font-medium text-foreground transition-all hover:border-primary/50 hover:bg-secondary">
-                  Enquire
+                  Compare Classes
                 </button>
               </div>
 
               <div className="grid grid-cols-3 gap-4 rounded-xl border border-border/50 bg-card p-4">
                 <div className="flex flex-col items-center gap-1.5 text-center">
                   <Sparkles className="h-5 w-5 text-primary" />
-                  <span className="font-body text-sm text-muted-foreground">Butler Service</span>
+                  <span className="font-body text-sm text-muted-foreground">Premium Service</span>
                 </div>
                 <div className="flex flex-col items-center gap-1.5 text-center">
                   <Shield className="h-5 w-5 text-primary" />
-                  <span className="font-body text-sm text-muted-foreground">Private Access</span>
+                  <span className="font-body text-sm text-muted-foreground">Free Changes</span>
                 </div>
                 <div className="flex flex-col items-center gap-1.5 text-center">
-                  <Calendar className="h-5 w-5 text-primary" />
-                  <span className="font-body text-sm text-muted-foreground">Flexible Dates</span>
+                  <Plane className="h-5 w-5 text-primary" />
+                  <span className="font-body text-sm text-muted-foreground">Priority Boarding</span>
                 </div>
               </div>
             </motion.div>
@@ -121,7 +121,7 @@ const PropertyDetail = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
               >
-                <h2 className="mb-8 font-display text-2xl font-bold italic">Details</h2>
+                <h2 className="mb-8 font-display text-2xl font-bold">Specifications</h2>
                 <div className="space-y-0 divide-y divide-border/50">
                   {property.details.map((spec) => (
                     <div key={spec.label} className="flex items-center justify-between py-4">
@@ -138,7 +138,7 @@ const PropertyDetail = () => {
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
               >
-                <h2 className="mb-8 font-display text-2xl font-bold italic">Highlights</h2>
+                <h2 className="mb-8 font-display text-2xl font-bold">Highlights</h2>
                 <ul className="space-y-4">
                   {property.highlights.map((feature, i) => (
                     <li key={i} className="flex items-start gap-3">
@@ -156,7 +156,7 @@ const PropertyDetail = () => {
 
         <section className="py-16 md:py-24">
           <div className="container">
-            <h2 className="mb-10 font-display text-2xl font-bold italic">You May Also Enjoy</h2>
+            <h2 className="mb-10 font-display text-2xl font-bold">Other Cabin Classes</h2>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {otherProperties.map((p, i) => (
                 <motion.div

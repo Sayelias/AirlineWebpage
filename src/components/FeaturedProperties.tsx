@@ -16,17 +16,17 @@ const FeaturedProperties = () => {
         >
           <div>
             <p className="mb-2 font-display text-sm font-medium uppercase tracking-[0.3em] text-primary">
-              Curated Experiences
+              Travel Your Way
             </p>
-            <h2 className="font-display text-3xl font-bold italic tracking-tight md:text-5xl">
-              Suites & Experiences
+            <h2 className="font-display text-3xl font-bold tracking-tight md:text-5xl">
+              Our Cabin Classes
             </h2>
           </div>
           <a
             href="#"
             className="hidden items-center gap-2 font-body text-base text-muted-foreground transition-colors hover:text-primary md:inline-flex"
           >
-            View All <ArrowRight className="h-4 w-4" />
+            Compare All <ArrowRight className="h-4 w-4" />
           </a>
         </motion.div>
 
@@ -49,7 +49,7 @@ const FeaturedProperties = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                   <div className="absolute bottom-4 left-4 right-4 translate-y-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                    <span className="block w-full rounded-full bg-gradient-gold py-2.5 text-center font-display text-sm font-semibold text-primary-foreground">
+                    <span className="block w-full rounded-full bg-gradient-sky py-2.5 text-center font-display text-sm font-semibold text-primary-foreground">
                       View Details
                     </span>
                   </div>

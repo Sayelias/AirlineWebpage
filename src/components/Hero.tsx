@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import heroImage from "@/assets/hero-hotel.webp";
+import heroImage from "@/assets/hero-airline.webp";
 import BookingDialog from "@/components/BookingDialog";
 
 const Hero = () => {
@@ -9,7 +9,7 @@ const Hero = () => {
       <div className="absolute inset-0">
         <img
           src={heroImage}
-          alt="Grand lobby of AnyPremium Hotels with crystal chandelier and ocean sunset view"
+          alt="AnyCompany Airlines aircraft flying above the clouds at sunset"
           className="h-full w-full object-cover"
           loading="eager"
         />
@@ -25,17 +25,17 @@ const Hero = () => {
             transition={{ duration: 0.6 }}
             className="mb-4 font-display text-sm font-medium uppercase tracking-[0.4em] text-primary"
           >
-            Six-Star Hospitality
+            Fly Beyond Expectations
           </motion.p>
 
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.15 }}
-            className="mb-6 font-display text-5xl font-bold italic leading-[1.1] tracking-tight md:text-7xl"
+            className="mb-6 font-display text-5xl font-bold leading-[1.1] tracking-tight md:text-7xl"
           >
-            Where Elegance{" "}
-            <span className="text-gradient-gold">Knows No Bounds</span>
+            Your Journey{" "}
+            <span className="text-gradient-sky">Starts Here</span>
           </motion.h1>
 
           <motion.p
@@ -44,8 +44,8 @@ const Hero = () => {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="mb-10 max-w-lg font-body text-xl leading-relaxed text-muted-foreground"
           >
-            An unparalleled collection of iconic properties across the world's
-            most coveted destinations. Redefining luxury, one stay at a time.
+            Connecting the world's greatest cities with exceptional comfort,
+            award-winning service, and unbeatable reliability. Fly AnyCompany.
           </motion.p>
 
           <motion.div
@@ -55,8 +55,8 @@ const Hero = () => {
             className="flex flex-wrap gap-4"
           >
             <BookingDialog>
-              <button className="group inline-flex items-center gap-2 rounded-full bg-gradient-gold px-8 py-3.5 font-display text-sm font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20">
-                Reserve Your Stay
+              <button className="group inline-flex items-center gap-2 rounded-full bg-gradient-sky px-8 py-3.5 font-display text-sm font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20">
+                Book a Flight
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
               </button>
             </BookingDialog>
@@ -64,7 +64,7 @@ const Hero = () => {
               href="#destinations"
               className="inline-flex items-center gap-2 rounded-full border border-border px-8 py-3.5 font-display text-sm font-medium text-foreground transition-all hover:border-primary/50 hover:bg-secondary"
             >
-              Our Destinations
+              Explore Routes
             </a>
           </motion.div>
         </div>

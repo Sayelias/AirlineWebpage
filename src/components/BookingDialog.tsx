@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { format, addDays } from "date-fns";
-import { CalendarIcon, Users, MapPin, Minus, Plus, Check } from "lucide-react";
+import { format } from "date-fns";
+import { CalendarIcon, Users, Plane, Minus, Plus, Check, ArrowRightLeft } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Calendar } from "@/components/ui/calendar";
@@ -9,43 +9,59 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Button } from "@/components/ui/button";
 import { toast } from "@/hooks/use-toast";
 
-const destinations = [
-  "AnyPremium Dubai — Palm Jumeirah",
-  "AnyPremium Paris — Place Vendôme",
-  "AnyPremium New York — Central Park",
-  "AnyPremium Tokyo — Ginza",
-  "AnyPremium Sydney — Harbour",
-  "AnyPremium Maldives — Private Island",
+const airports = [
+  "New York (JFK)",
+  "Los Angeles (LAX)",
+  "Chicago (ORD)",
+  "San Francisco (SFO)",
+  "Miami (MIA)",
+  "Seattle (SEA)",
+  "London (LHR)",
+  "Paris (CDG)",
+  "Tokyo (NRT)",
+  "Dubai (DXB)",
+  "Sydney (SYD)",
+  "Singapore (SIN)",
 ];
 
-const suiteTypes = [
-  "Ocean Penthouse Suite",
-  "The Presidential Suite",
-  "Grand Deluxe Suite",
-  "Premier Ocean View Room",
+const cabinClasses = [
+  "Economy",
+  "Premium Economy",
+  "Business Class",
+  "First Class",
 ];
 
 interface BookingDialogProps {
   children: React.ReactNode;
-  defaultDestination?: string;
+  defaultRoute?: string;
   defaultSuite?: string;
 }
 
-const BookingDialog = ({ children, defaultDestination, defaultSuite }: BookingDialogProps) => {
+const BookingDialog = ({ children, defaultRoute, defaultSuite }: BookingDialogProps) => {
   const [open, setOpen] = useState(false);
-  const [checkIn, setCheckIn] = useState<Date>();
-  const [checkOut, setCheckOut] = useState<Date>();
-  const [destination, setDestination] = useState(defaultDestination || "");
-  const [suite, setSuite] = useState(defaultSuite || "");
-  const [adults, setAdults] = useState(2);
+  const [departure, setDeparture] = useState<Date>();
+  const [returnDate, setReturnDate] = useState<Date>();
+  const [from, setFrom] = useState(defaultRoute?.split(" → ")[0] || "");
+  const [to, setTo] = useState(defaultRoute?.split(" → ")[1] || "");
+  const [cabin, setCabin] = useState(defaultSuite || "");
+  const [adults, setAdults] = useState(1);
   const [children_, setChildren] = useState(0);
+  const [tripType, setTripType] = useState<"roundtrip" | "oneway">("roundtrip");
   const [submitted, setSubmitted] = useState(false);
 
   const handleSubmit = () => {
-    if (!checkIn || !checkOut || !destination || !suite) {
+    if (!departure || !from || !to || !cabin) {
       toast({
         title: "Please complete all fields",
-        description: "Select your destination, suite, check-in and check-out dates.",
+        description: "Select your airports, cabin class, and travel date.",
+        variant: "destructive",
+      });
+      return;
+    }
+    if (from === to) {
+      toast({
+        title: "Invalid route",
+        description: "Departure and arrival airports must be different.",
         variant: "destructive",
       });
       return;
@@ -56,12 +72,15 @@ const BookingDialog = ({ children, defaultDestination, defaultSuite }: BookingDi
   const handleClose = (isOpen: boolean) => {
     setOpen(isOpen);
     if (!isOpen) {
-      // Reset after close
       setTimeout(() => setSubmitted(false), 300);
     }
   };
 
-  const minCheckOut = checkIn ? addDays(checkIn, 1) : addDays(new Date(), 1);
+  const swapAirports = () => {
+    const temp = from;
+    setFrom(to);
+    setTo(temp);
+  };
 
   return (
     <Dialog open={open} onOpenChange={handleClose}>
@@ -72,34 +91,35 @@ const BookingDialog = ({ children, defaultDestination, defaultSuite }: BookingDi
             <div className="mx-auto mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
               <Check className="h-8 w-8 text-primary" />
             </div>
-            <h2 className="mb-2 font-display text-2xl font-bold italic">Reservation Received</h2>
+            <h2 className="mb-2 font-display text-2xl font-bold">Booking Confirmed!</h2>
             <p className="mb-1 font-body text-lg text-muted-foreground">
-              Thank you for choosing AnyPremium Hotels.
+              Thank you for choosing AnyCompany Airlines.
             </p>
             <p className="mb-6 font-body text-base text-muted-foreground">
-              Our concierge team will confirm your booking within 24 hours.
+              Your e-ticket and confirmation details will be sent to your email.
             </p>
             <div className="mx-auto max-w-xs space-y-2 rounded-xl border border-border/50 bg-secondary/50 p-4 text-left">
               <p className="font-body text-sm text-muted-foreground">
-                <span className="font-display text-xs font-semibold uppercase tracking-wider text-foreground">Destination:</span>{" "}
-                {destination}
+                <span className="font-display text-xs font-semibold uppercase tracking-wider text-foreground">Route:</span>{" "}
+                {from} → {to}
               </p>
               <p className="font-body text-sm text-muted-foreground">
-                <span className="font-display text-xs font-semibold uppercase tracking-wider text-foreground">Suite:</span>{" "}
-                {suite}
+                <span className="font-display text-xs font-semibold uppercase tracking-wider text-foreground">Class:</span>{" "}
+                {cabin}
               </p>
               <p className="font-body text-sm text-muted-foreground">
-                <span className="font-display text-xs font-semibold uppercase tracking-wider text-foreground">Dates:</span>{" "}
-                {checkIn && format(checkIn, "MMM d, yyyy")} — {checkOut && format(checkOut, "MMM d, yyyy")}
+                <span className="font-display text-xs font-semibold uppercase tracking-wider text-foreground">Departure:</span>{" "}
+                {departure && format(departure, "MMM d, yyyy")}
+                {tripType === "roundtrip" && returnDate && ` — ${format(returnDate, "MMM d, yyyy")}`}
               </p>
               <p className="font-body text-sm text-muted-foreground">
-                <span className="font-display text-xs font-semibold uppercase tracking-wider text-foreground">Guests:</span>{" "}
+                <span className="font-display text-xs font-semibold uppercase tracking-wider text-foreground">Passengers:</span>{" "}
                 {adults} adult{adults !== 1 ? "s" : ""}{children_ > 0 ? `, ${children_} child${children_ !== 1 ? "ren" : ""}` : ""}
               </p>
             </div>
             <button
               onClick={() => handleClose(false)}
-              className="mt-8 rounded-full bg-gradient-gold px-8 py-3 font-display text-sm font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20"
+              className="mt-8 rounded-full bg-gradient-sky px-8 py-3 font-display text-sm font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20"
             >
               Done
             </button>
@@ -107,60 +127,109 @@ const BookingDialog = ({ children, defaultDestination, defaultSuite }: BookingDi
         ) : (
           <>
             <DialogHeader>
-              <DialogTitle className="font-display text-2xl font-bold italic">
-                Reserve Your Stay
+              <DialogTitle className="font-display text-2xl font-bold">
+                Book a Flight
               </DialogTitle>
               <p className="font-body text-base text-muted-foreground">
-                Select your destination and dates for a bespoke experience.
+                Search and book flights to destinations worldwide.
               </p>
             </DialogHeader>
 
             <div className="mt-4 space-y-5">
-              {/* Destination */}
-              <div>
-                <label className="mb-2 block font-display text-xs font-semibold uppercase tracking-wider">
-                  <MapPin className="mb-0.5 mr-1 inline h-3.5 w-3.5 text-primary" />
-                  Destination
-                </label>
-                <Select value={destination} onValueChange={setDestination}>
-                  <SelectTrigger className="h-12 border-border/50 bg-secondary/50 font-body text-base">
-                    <SelectValue placeholder="Select a property" />
-                  </SelectTrigger>
-                  <SelectContent className="border-border/50 bg-card">
-                    {destinations.map((d) => (
-                      <SelectItem key={d} value={d} className="font-body text-base">
-                        {d}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
+              {/* Trip Type */}
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setTripType("roundtrip")}
+                  className={cn(
+                    "rounded-full px-4 py-1.5 font-display text-xs font-semibold transition-all",
+                    tripType === "roundtrip"
+                      ? "bg-primary text-primary-foreground"
+                      : "border border-border/50 text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  Round Trip
+                </button>
+                <button
+                  onClick={() => setTripType("oneway")}
+                  className={cn(
+                    "rounded-full px-4 py-1.5 font-display text-xs font-semibold transition-all",
+                    tripType === "oneway"
+                      ? "bg-primary text-primary-foreground"
+                      : "border border-border/50 text-muted-foreground hover:text-foreground"
+                  )}
+                >
+                  One Way
+                </button>
               </div>
 
-              {/* Suite */}
+              {/* From / To */}
+              <div className="relative">
+                <div className="grid grid-cols-[1fr,auto,1fr] items-end gap-2">
+                  <div>
+                    <label className="mb-2 block font-display text-xs font-semibold uppercase tracking-wider">
+                      <Plane className="mb-0.5 mr-1 inline h-3.5 w-3.5 text-primary" />
+                      From
+                    </label>
+                    <Select value={from} onValueChange={setFrom}>
+                      <SelectTrigger className="h-12 border-border/50 bg-secondary/50 font-body text-base">
+                        <SelectValue placeholder="Departure" />
+                      </SelectTrigger>
+                      <SelectContent className="border-border/50 bg-card">
+                        {airports.map((a) => (
+                          <SelectItem key={a} value={a} className="font-body text-base">{a}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <button
+                    onClick={swapAirports}
+                    className="mb-1 flex h-10 w-10 items-center justify-center rounded-full border border-border/50 text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
+                  >
+                    <ArrowRightLeft className="h-4 w-4" />
+                  </button>
+
+                  <div>
+                    <label className="mb-2 block font-display text-xs font-semibold uppercase tracking-wider">
+                      To
+                    </label>
+                    <Select value={to} onValueChange={setTo}>
+                      <SelectTrigger className="h-12 border-border/50 bg-secondary/50 font-body text-base">
+                        <SelectValue placeholder="Arrival" />
+                      </SelectTrigger>
+                      <SelectContent className="border-border/50 bg-card">
+                        {airports.map((a) => (
+                          <SelectItem key={a} value={a} className="font-body text-base">{a}</SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </div>
+                </div>
+              </div>
+
+              {/* Cabin */}
               <div>
                 <label className="mb-2 block font-display text-xs font-semibold uppercase tracking-wider">
-                  Suite Type
+                  Cabin Class
                 </label>
-                <Select value={suite} onValueChange={setSuite}>
+                <Select value={cabin} onValueChange={setCabin}>
                   <SelectTrigger className="h-12 border-border/50 bg-secondary/50 font-body text-base">
-                    <SelectValue placeholder="Select a suite" />
+                    <SelectValue placeholder="Select class" />
                   </SelectTrigger>
                   <SelectContent className="border-border/50 bg-card">
-                    {suiteTypes.map((s) => (
-                      <SelectItem key={s} value={s} className="font-body text-base">
-                        {s}
-                      </SelectItem>
+                    {cabinClasses.map((c) => (
+                      <SelectItem key={c} value={c} className="font-body text-base">{c}</SelectItem>
                     ))}
                   </SelectContent>
                 </Select>
               </div>
 
               {/* Dates */}
-              <div className="grid grid-cols-2 gap-3">
+              <div className={cn("grid gap-3", tripType === "roundtrip" ? "grid-cols-2" : "grid-cols-1")}>
                 <div>
                   <label className="mb-2 block font-display text-xs font-semibold uppercase tracking-wider">
                     <CalendarIcon className="mb-0.5 mr-1 inline h-3.5 w-3.5 text-primary" />
-                    Check-in
+                    Departure
                   </label>
                   <Popover>
                     <PopoverTrigger asChild>
@@ -168,20 +237,20 @@ const BookingDialog = ({ children, defaultDestination, defaultSuite }: BookingDi
                         variant="outline"
                         className={cn(
                           "h-12 w-full justify-start border-border/50 bg-secondary/50 font-body text-base",
-                          !checkIn && "text-muted-foreground"
+                          !departure && "text-muted-foreground"
                         )}
                       >
-                        {checkIn ? format(checkIn, "MMM d, yyyy") : "Select date"}
+                        {departure ? format(departure, "MMM d, yyyy") : "Select date"}
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent className="w-auto border-border/50 bg-card p-0" align="start">
                       <Calendar
                         mode="single"
-                        selected={checkIn}
+                        selected={departure}
                         onSelect={(date) => {
-                          setCheckIn(date);
-                          if (date && checkOut && checkOut <= date) {
-                            setCheckOut(addDays(date, 1));
+                          setDeparture(date);
+                          if (date && returnDate && returnDate <= date) {
+                            setReturnDate(undefined);
                           }
                         }}
                         disabled={(date) => date < new Date()}
@@ -192,41 +261,43 @@ const BookingDialog = ({ children, defaultDestination, defaultSuite }: BookingDi
                   </Popover>
                 </div>
 
-                <div>
-                  <label className="mb-2 block font-display text-xs font-semibold uppercase tracking-wider">
-                    Check-out
-                  </label>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <Button
-                        variant="outline"
-                        className={cn(
-                          "h-12 w-full justify-start border-border/50 bg-secondary/50 font-body text-base",
-                          !checkOut && "text-muted-foreground"
-                        )}
-                      >
-                        {checkOut ? format(checkOut, "MMM d, yyyy") : "Select date"}
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto border-border/50 bg-card p-0" align="start">
-                      <Calendar
-                        mode="single"
-                        selected={checkOut}
-                        onSelect={setCheckOut}
-                        disabled={(date) => date < minCheckOut}
-                        initialFocus
-                        className={cn("p-3 pointer-events-auto")}
-                      />
-                    </PopoverContent>
-                  </Popover>
-                </div>
+                {tripType === "roundtrip" && (
+                  <div>
+                    <label className="mb-2 block font-display text-xs font-semibold uppercase tracking-wider">
+                      Return
+                    </label>
+                    <Popover>
+                      <PopoverTrigger asChild>
+                        <Button
+                          variant="outline"
+                          className={cn(
+                            "h-12 w-full justify-start border-border/50 bg-secondary/50 font-body text-base",
+                            !returnDate && "text-muted-foreground"
+                          )}
+                        >
+                          {returnDate ? format(returnDate, "MMM d, yyyy") : "Select date"}
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent className="w-auto border-border/50 bg-card p-0" align="start">
+                        <Calendar
+                          mode="single"
+                          selected={returnDate}
+                          onSelect={setReturnDate}
+                          disabled={(date) => date < (departure || new Date())}
+                          initialFocus
+                          className={cn("p-3 pointer-events-auto")}
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  </div>
+                )}
               </div>
 
-              {/* Guests */}
+              {/* Passengers */}
               <div>
                 <label className="mb-2 block font-display text-xs font-semibold uppercase tracking-wider">
                   <Users className="mb-0.5 mr-1 inline h-3.5 w-3.5 text-primary" />
-                  Guests
+                  Passengers
                 </label>
                 <div className="grid grid-cols-2 gap-3">
                   <div className="flex items-center justify-between rounded-lg border border-border/50 bg-secondary/50 px-4 py-3">
@@ -240,7 +311,7 @@ const BookingDialog = ({ children, defaultDestination, defaultSuite }: BookingDi
                       </button>
                       <span className="w-5 text-center font-display text-sm font-semibold">{adults}</span>
                       <button
-                        onClick={() => setAdults(Math.min(6, adults + 1))}
+                        onClick={() => setAdults(Math.min(9, adults + 1))}
                         className="flex h-7 w-7 items-center justify-center rounded-full border border-border/50 text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
                       >
                         <Plus className="h-3 w-3" />
@@ -258,7 +329,7 @@ const BookingDialog = ({ children, defaultDestination, defaultSuite }: BookingDi
                       </button>
                       <span className="w-5 text-center font-display text-sm font-semibold">{children_}</span>
                       <button
-                        onClick={() => setChildren(Math.min(4, children_ + 1))}
+                        onClick={() => setChildren(Math.min(8, children_ + 1))}
                         className="flex h-7 w-7 items-center justify-center rounded-full border border-border/50 text-muted-foreground transition-colors hover:border-primary/50 hover:text-foreground"
                       >
                         <Plus className="h-3 w-3" />
@@ -271,13 +342,13 @@ const BookingDialog = ({ children, defaultDestination, defaultSuite }: BookingDi
               {/* Submit */}
               <button
                 onClick={handleSubmit}
-                className="w-full rounded-full bg-gradient-gold py-3.5 font-display text-sm font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20"
+                className="w-full rounded-full bg-gradient-sky py-3.5 font-display text-sm font-semibold text-primary-foreground transition-all hover:shadow-lg hover:shadow-primary/20"
               >
-                Request Reservation
+                Search Flights
               </button>
 
               <p className="text-center font-body text-xs text-muted-foreground">
-                No payment required now. Our concierge will contact you to confirm.
+                Flexible booking — free changes up to 24 hours before departure.
               </p>
             </div>
           </>
