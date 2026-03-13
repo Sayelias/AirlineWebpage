@@ -8,6 +8,7 @@ import PropertyDetail from "./pages/PropertyDetail";
 import FAQ from "./pages/FAQ";
 import Membership from "./pages/Membership";
 import MemberDashboard from "./pages/MemberDashboard";
+import RoutesPage from "./pages/Routes";
 import NotFound from "./pages/NotFound";
 import VoiceAssistant from "./components/VoiceAssistant";
 
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="/faq" element={<FAQ />} />
           <Route path="/membership" element={<Membership />} />
           <Route path="/membership/dashboard" element={<MemberDashboard />} />
+          <Route path="/routes" element={<RoutesPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
         <VoiceAssistant />

@@ -1,28 +1,22 @@
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { MapPin, Plane, Globe, Search } from "lucide-react";
+import { Globe, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import { routes, regions } from "@/data/routes";
 
+const highlightCities = [
+  { city: "London", code: "LHR" },
+  { city: "Tokyo", code: "NRT" },
+  { city: "New York", code: "JFK" },
+  { city: "Paris", code: "CDG" },
+  { city: "Sydney", code: "SYD" },
+  { city: "Bangkok", code: "BKK" },
+];
+
 const Destinations = () => {
-  const [activeRegion, setActiveRegion] = useState<string>("All");
-  const [search, setSearch] = useState("");
-
-  const filtered = routes.filter((r) => {
-    const matchesRegion = activeRegion === "All" || r.region === activeRegion;
-    const q = search.toLowerCase();
-    const matchesSearch =
-      !q ||
-      r.city.toLowerCase().includes(q) ||
-      r.country.toLowerCase().includes(q) ||
-      r.code.toLowerCase().includes(q) ||
-      r.airport.toLowerCase().includes(q);
-    return matchesRegion && matchesSearch;
-  });
-
-  const grouped = filtered.reduce<Record<string, typeof routes>>((acc, r) => {
-    (acc[r.region] ??= []).push(r);
-    return acc;
-  }, {});
+  const regionCounts = regions.map((region) => ({
+    name: region,
+    count: routes.filter((r) => r.region === region).length,
+  }));
 
   return (
     <section id="destinations" className="border-t border-border/50 bg-secondary/30 py-24 md:py-32">
@@ -32,103 +26,86 @@ const Destinations = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="mb-12 text-center"
+          className="mb-14 text-center"
         >
           <p className="mb-2 font-display text-sm font-medium uppercase tracking-[0.3em] text-primary">
             Global Network
           </p>
           <h2 className="mb-4 font-display text-3xl font-bold tracking-tight md:text-5xl">
-            {routes.length} International Destinations
+            Fly to {routes.length}+ Destinations
           </h2>
           <p className="mx-auto max-w-lg font-body text-lg text-muted-foreground">
-            Based on Korean Air's route network — connecting Seoul Incheon to cities across{" "}
-            {regions.length} regions worldwide.
+            From Seoul Incheon to the world — connecting you to {regions.length} regions across every continent.
           </p>
         </motion.div>
 
-        {/* Search + Region filters */}
-        <div className="mb-10 space-y-4">
-          <div className="relative mx-auto max-w-md">
-            <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
-            <input
-              type="text"
-              placeholder="Search city, country, or airport code…"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-full border border-border/50 bg-card py-3 pl-11 pr-4 font-body text-sm text-foreground placeholder:text-muted-foreground focus:border-primary/50 focus:outline-none focus:ring-1 focus:ring-primary/30"
-            />
-          </div>
+        {/* Region pills */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="mb-14 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7"
+        >
+          {regionCounts.map(({ name, count }) => (
+            <Link
+              key={name}
+              to={`/routes?region=${encodeURIComponent(name)}`}
+              className="group flex flex-col items-center rounded-xl border border-border/50 bg-card px-4 py-5 text-center transition-all hover:border-primary/30 hover:shadow-md"
+            >
+              <Globe className="mb-2 h-5 w-5 text-primary" />
+              <span className="font-display text-sm font-semibold text-foreground">{name}</span>
+              <span className="mt-1 font-body text-xs text-muted-foreground">
+                {count} {count === 1 ? "city" : "cities"}
+              </span>
+            </Link>
+          ))}
+        </motion.div>
 
-          <div className="flex flex-wrap justify-center gap-2">
-            {["All", ...regions].map((region) => (
-              <button
-                key={region}
-                onClick={() => setActiveRegion(region)}
-                className={`rounded-full px-4 py-1.5 font-display text-xs font-semibold transition-all ${
-                  activeRegion === region
-                    ? "bg-gradient-sky text-primary-foreground shadow-md shadow-primary/20"
-                    : "border border-border/50 bg-card text-muted-foreground hover:border-primary/30 hover:text-foreground"
-                }`}
+        {/* Featured cities */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mb-10"
+        >
+          <h3 className="mb-5 text-center font-display text-lg font-semibold text-foreground">
+            Popular Routes from Seoul
+          </h3>
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-6">
+            {highlightCities.map((dest) => (
+              <div
+                key={dest.code}
+                className="group flex flex-col items-center rounded-xl border border-border/50 bg-card px-4 py-5 transition-all hover:border-primary/30 hover:shadow-md"
               >
-                {region}
-              </button>
+                <span className="mb-1 rounded-md bg-primary/10 px-2.5 py-1 font-display text-xs font-bold text-primary">
+                  {dest.code}
+                </span>
+                <span className="mt-2 font-display text-sm font-semibold text-foreground">
+                  {dest.city}
+                </span>
+              </div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
-        {/* Results count */}
-        <p className="mb-6 text-center font-body text-sm text-muted-foreground">
-          Showing {filtered.length} destination{filtered.length !== 1 ? "s" : ""}
-        </p>
-
-        {/* Grouped routes */}
-        {Object.entries(grouped).map(([region, destinations]) => (
-          <motion.div
-            key={region}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4 }}
-            className="mb-10"
+        {/* CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.4, delay: 0.3 }}
+          className="text-center"
+        >
+          <Link
+            to="/routes"
+            className="group inline-flex items-center gap-2 rounded-full bg-gradient-sky px-8 py-3.5 font-display text-sm font-semibold text-accent-foreground transition-all hover:shadow-lg hover:shadow-accent/20"
           >
-            <div className="mb-4 flex items-center gap-2">
-              <Globe className="h-4 w-4 text-primary" />
-              <h3 className="font-display text-lg font-bold">{region}</h3>
-              <span className="rounded-full bg-primary/10 px-2.5 py-0.5 font-display text-xs font-semibold text-primary">
-                {destinations.length}
-              </span>
-            </div>
-
-            <div className="grid gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-              {destinations.map((dest) => (
-                <div
-                  key={`${dest.code}-${dest.city}`}
-                  className="group flex items-center gap-3 rounded-lg border border-border/50 bg-card px-4 py-3 transition-all hover:border-primary/30 hover:glow-sky"
-                >
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md bg-primary/10 font-display text-xs font-bold text-primary">
-                    {dest.code}
-                  </div>
-                  <div className="min-w-0">
-                    <p className="truncate font-display text-sm font-semibold text-foreground">
-                      {dest.city}
-                    </p>
-                    <p className="flex items-center gap-1 truncate font-body text-xs text-muted-foreground">
-                      <MapPin className="h-3 w-3 shrink-0" />
-                      {dest.country}
-                    </p>
-                  </div>
-                  <Plane className="ml-auto h-3.5 w-3.5 shrink-0 text-muted-foreground/40 transition-colors group-hover:text-primary" />
-                </div>
-              ))}
-            </div>
-          </motion.div>
-        ))}
-
-        {filtered.length === 0 && (
-          <p className="py-16 text-center font-body text-muted-foreground">
-            No destinations found. Try a different search.
-          </p>
-        )}
+            View All Routes
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </motion.div>
       </div>
     </section>
   );
