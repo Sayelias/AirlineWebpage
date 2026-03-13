@@ -98,6 +98,15 @@ const VoiceAssistant = () => {
 
       meetingSessionRef.current = meetingSession;
 
+      // Select microphone input before starting
+      const audioInputDevices =
+        await meetingSession.audioVideo.listAudioInputDevices();
+      if (audioInputDevices.length > 0) {
+        await meetingSession.audioVideo.startAudioInput(
+          audioInputDevices[0].deviceId
+        );
+      }
+
       // Start the call
       meetingSession.audioVideo.start();
     } catch (error: any) {
