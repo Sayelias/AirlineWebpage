@@ -1,76 +1,153 @@
 import { useState, useCallback, useEffect, useRef } from "react";
-import { useConversation } from "@elevenlabs/react";
+import {
+  ConsoleLogger,
+  DefaultDeviceController,
+  DefaultMeetingSession,
+  MeetingSessionConfiguration,
+} from "amazon-chime-sdk-js";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mic, MicOff, X, Plane, Volume2 } from "lucide-react";
 
-const AGENT_ID = "agent_6301kkbfp4bqf38rcg5k7qgw4pbv";
+const WEBRTC_API_URL =
+  "https://vwzty2i1bf.execute-api.us-east-1.amazonaws.com/prod/voice/start-call";
 
 const VoiceAssistant = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isConnecting, setIsConnecting] = useState(false);
-  const [transcript, setTranscript] = useState<{ role: string; text: string }[]>([]);
-  const scrollRef = useRef<HTMLDivElement>(null);
-
-  const conversation = useConversation({
-    onConnect: () => console.log("Connected to SkyAssist"),
-    onDisconnect: () => {
-      console.log("Disconnected from SkyAssist");
-      setIsConnecting(false);
-    },
-    onError: (error) => {
-      console.error("Voice error:", error);
-      setIsConnecting(false);
-    },
-    onMessage: (message: any) => {
-      if (message.type === "user_transcript") {
-        const text = message.user_transcription_event?.user_transcript;
-        if (text) setTranscript((prev) => [...prev, { role: "user", text }]);
-      } else if (message.type === "agent_response") {
-        const text = message.agent_response_event?.agent_response;
-        if (text) setTranscript((prev) => [...prev, { role: "agent", text }]);
-      }
-    },
-  });
-
-  useEffect(() => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
-  }, [transcript]);
+  const [isConnected, setIsConnected] = useState(false);
+  const [isSpeaking, setIsSpeaking] = useState(false);
+  const [statusMessage, setStatusMessage] = useState("");
+  const meetingSessionRef = useRef<DefaultMeetingSession | null>(null);
+  const audioElementRef = useRef<HTMLAudioElement | null>(null);
 
   const startConversation = useCallback(async () => {
     setIsConnecting(true);
+    setStatusMessage("Checking permissions...");
+
     try {
-      await navigator.mediaDevices.getUserMedia({ audio: true });
-      await conversation.startSession({
-        agentId: AGENT_ID,
-      } as any);
-    } catch (error) {
-      console.error("Failed to start:", error);
+      // Check microphone permission
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      stream.getTracks().forEach((t) => t.stop());
+
+      setStatusMessage("Connecting to AnyCompany Airlines...");
+
+      // Call the StartWebRTC API
+      const response = await fetch(WEBRTC_API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          displayName: "Website Visitor",
+          attributes: {
+            Channel: "web-voice",
+            Source: "airline-website",
+            Timestamp: new Date().toISOString(),
+          },
+        }),
+      });
+
+      if (!response.ok) {
+        const err = await response.json();
+        throw new Error(err.error || `HTTP ${response.status}`);
+      }
+
+      const data = await response.json();
+      if (!data.success || !data.ConnectionData) {
+        throw new Error("Invalid response from WebRTC API");
+      }
+
+      setStatusMessage("Setting up call...");
+
+      // Set up Chime meeting session
+      const logger = new ConsoleLogger("SkyAssist-WebRTC", 2);
+      const deviceController = new DefaultDeviceController(logger);
+      const configuration = new MeetingSessionConfiguration(
+        data.ConnectionData.Meeting,
+        data.ConnectionData.Attendee
+      );
+
+      const meetingSession = new DefaultMeetingSession(
+        configuration,
+        logger,
+        deviceController
+      );
+
+      // Bind audio output
+      if (audioElementRef.current) {
+        meetingSession.audioVideo.bindAudioElement(audioElementRef.current);
+      }
+
+      // Add observer for connection events
+      meetingSession.audioVideo.addObserver({
+        audioVideoDidStart: () => {
+          console.log("✅ WebRTC call connected");
+          setIsConnected(true);
+          setIsConnecting(false);
+          setStatusMessage("");
+        },
+        audioVideoDidStop: () => {
+          console.log("📞 WebRTC call ended");
+          setIsConnected(false);
+          setIsConnecting(false);
+          setIsSpeaking(false);
+          meetingSessionRef.current = null;
+        },
+        connectionDidBecomePoor: () => {
+          console.log("⚠️ Connection quality is poor");
+        },
+      });
+
+      meetingSessionRef.current = meetingSession;
+
+      // Start the call
+      meetingSession.audioVideo.start();
+    } catch (error: any) {
+      console.error("Failed to start WebRTC call:", error);
+      setStatusMessage(`Error: ${error.message}`);
       setIsConnecting(false);
+      setTimeout(() => setStatusMessage(""), 4000);
     }
-  }, [conversation]);
+  }, []);
 
   const stopConversation = useCallback(async () => {
-    await conversation.endSession();
-    setTranscript([]);
-  }, [conversation]);
+    try {
+      if (meetingSessionRef.current) {
+        meetingSessionRef.current.audioVideo.stop();
+        meetingSessionRef.current = null;
+      }
+    } catch (error) {
+      console.error("Error ending call:", error);
+    }
+    setIsConnected(false);
+    setIsConnecting(false);
+    setIsSpeaking(false);
+    setStatusMessage("");
+  }, []);
 
   const handleToggle = () => {
     if (!isOpen) {
       setIsOpen(true);
     } else {
-      if (conversation.status === "connected") {
+      if (isConnected) {
         stopConversation();
       }
       setIsOpen(false);
     }
   };
 
-  const isConnected = conversation.status === "connected";
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (meetingSessionRef.current) {
+        meetingSessionRef.current.audioVideo.stop();
+      }
+    };
+  }, []);
 
   return (
     <>
+      {/* Hidden audio element for WebRTC output */}
+      <audio ref={audioElementRef} id="webrtc-audio-output" autoPlay />
+
       {/* Floating trigger button */}
       <motion.button
         onClick={handleToggle}
@@ -111,13 +188,10 @@ const VoiceAssistant = () => {
               </div>
             </div>
 
-            {/* Transcript area */}
-            <div
-              ref={scrollRef}
-              className="flex min-h-[240px] max-h-[320px] flex-col gap-3 overflow-y-auto p-4"
-            >
-              {transcript.length === 0 && !isConnected && (
-                <div className="flex flex-1 flex-col items-center justify-center gap-3 text-center">
+            {/* Content area */}
+            <div className="flex min-h-[240px] max-h-[320px] flex-col items-center justify-center gap-3 overflow-y-auto p-4 text-center">
+              {!isConnected && !isConnecting && !statusMessage && (
+                <>
                   <div className="flex h-12 w-12 items-center justify-center rounded-full bg-secondary">
                     <Mic className="h-5 w-5 text-muted-foreground" />
                   </div>
@@ -129,11 +203,26 @@ const VoiceAssistant = () => {
                       Ask about flights, bookings, baggage, or SkyRewards
                     </p>
                   </div>
-                </div>
+                </>
               )}
 
-              {transcript.length === 0 && isConnected && (
-                <div className="flex flex-1 flex-col items-center justify-center gap-3 text-center">
+              {isConnecting && (
+                <>
+                  <motion.div
+                    animate={{ rotate: 360 }}
+                    transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+                    className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/20"
+                  >
+                    <Plane className="h-5 w-5 text-primary" />
+                  </motion.div>
+                  <p className="text-xs text-muted-foreground">
+                    {statusMessage || "Connecting…"}
+                  </p>
+                </>
+              )}
+
+              {isConnected && (
+                <>
                   <motion.div
                     animate={{ scale: [1, 1.15, 1] }}
                     transition={{ repeat: Infinity, duration: 1.5 }}
@@ -141,52 +230,16 @@ const VoiceAssistant = () => {
                   >
                     <Volume2 className="h-5 w-5 text-primary" />
                   </motion.div>
-                  <p className="text-xs text-muted-foreground">Listening…</p>
-                </div>
+                  <p className="text-xs text-muted-foreground">
+                    Connected — speak to our agent
+                  </p>
+                </>
               )}
 
-              {transcript.map((msg, i) => (
-                <div
-                  key={i}
-                  className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}
-                >
-                  <div
-                    className={`max-w-[80%] rounded-2xl px-4 py-2.5 text-sm leading-relaxed ${
-                      msg.role === "user"
-                        ? "rounded-br-md bg-primary text-primary-foreground"
-                        : "rounded-bl-md bg-secondary text-secondary-foreground"
-                    }`}
-                  >
-                    {msg.text}
-                  </div>
-                </div>
-              ))}
+              {!isConnecting && !isConnected && statusMessage && (
+                <p className="text-xs text-destructive">{statusMessage}</p>
+              )}
             </div>
-
-            {/* Speaking indicator */}
-            {isConnected && conversation.isSpeaking && (
-              <div className="flex items-center gap-2 border-t border-border/50 px-5 py-2">
-                <motion.div
-                  className="flex gap-1"
-                  animate={{ opacity: [0.4, 1, 0.4] }}
-                  transition={{ repeat: Infinity, duration: 1.2 }}
-                >
-                  {[0, 1, 2].map((i) => (
-                    <motion.div
-                      key={i}
-                      className="h-1.5 w-1.5 rounded-full bg-primary"
-                      animate={{ scaleY: [1, 1.8, 1] }}
-                      transition={{
-                        repeat: Infinity,
-                        duration: 0.6,
-                        delay: i * 0.15,
-                      }}
-                    />
-                  ))}
-                </motion.div>
-                <span className="text-xs text-muted-foreground">SkyAssist is speaking…</span>
-              </div>
-            )}
 
             {/* Controls */}
             <div className="flex items-center justify-center border-t border-border/50 bg-background/50 px-5 py-4">
@@ -200,7 +253,11 @@ const VoiceAssistant = () => {
                     <>
                       <motion.div
                         animate={{ rotate: 360 }}
-                        transition={{ repeat: Infinity, duration: 1, ease: "linear" }}
+                        transition={{
+                          repeat: Infinity,
+                          duration: 1,
+                          ease: "linear",
+                        }}
                         className="h-4 w-4 rounded-full border-2 border-primary-foreground/30 border-t-primary-foreground"
                       />
                       Connecting…
