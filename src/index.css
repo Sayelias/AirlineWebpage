@@ -73,19 +73,19 @@
 @layer utilities {
   .text-gradient-sky {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(135deg, hsl(205 90% 68%), hsl(210 100% 56%), hsl(215 80% 40%));
+    background-image: linear-gradient(135deg, hsl(195 100% 44%), hsl(220 100% 22%));
   }
 
   .bg-gradient-sky {
-    background-image: linear-gradient(135deg, hsl(205 90% 68%), hsl(210 100% 56%));
+    background-image: linear-gradient(135deg, hsl(195 85% 55%), hsl(195 100% 44%));
   }
 
   .glow-sky {
-    box-shadow: 0 0 50px -12px hsl(210 100% 56% / 0.25);
+    box-shadow: 0 0 50px -12px hsl(195 100% 44% / 0.3);
   }
 
   .border-gradient-sky {
-    border-image: linear-gradient(135deg, hsl(205 90% 68%), hsl(215 80% 40%)) 1;
+    border-image: linear-gradient(135deg, hsl(195 100% 44%), hsl(220 100% 22%)) 1;
   }
 
   /* Keep old utility names as aliases for transition */
